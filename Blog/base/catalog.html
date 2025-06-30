@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极简博客 - 目录</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="nav-logo" href="index.html">极简博客</a>
+      <div class="nav-menu">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="catalog.html">Blog</a>
+        <button class="nav-search-btn" id="nav-search-btn" title="搜索"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#fff" stroke-width="2"/><line x1="16.0607" y1="16.6464" x2="20" y2="20.5858" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></button>
+        <button class="theme-toggle" id="theme-toggle" title="切换日夜模式">🌙</button>
+      </div>
+    </div>
+  </nav>
+  <div class="search-modal" id="search-modal">
+    <button class="search-modal-close" id="search-modal-close" title="关闭">&times;</button>
+    <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Type to Search...">
+  </div>
+  <main class="main-content">
+    <section class="articles-section">
+      <ul class="articles-list" id="post-list"></ul>
+    </section>
+  </main>
+  <script src="main.js"></script>
+  <script>
+    // 主题切换按钮图标自适应
+    function updateThemeIcon() {
+      const btn = document.getElementById('theme-toggle');
+      if(document.body.classList.contains('dark')) {
+        btn.textContent = '☀️';
+      } else {
+        btn.textContent = '🌙';
+      }
+    }
+    updateThemeIcon();
+    const observer = new MutationObserver(updateThemeIcon);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    // 搜索弹窗逻辑
+    const searchModal = document.getElementById('search-modal');
+    const navSearchBtn = document.getElementById('nav-search-btn');
+    const searchModalClose = document.getElementById('search-modal-close');
+    const searchModalInput = document.getElementById('search-modal-input');
+    navSearchBtn.onclick = () => {
+      searchModal.classList.add('active');
+      setTimeout(() => searchModalInput.focus(), 200);
+      document.body.style.overflow = 'hidden';
+    };
+    searchModalClose.onclick = () => {
+      searchModal.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+    // esc关闭
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        searchModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // 渲染文章列表
+    const list = document.getElementById('post-list');
+    window.blogPosts.forEach(post => {
+      const li = document.createElement('li');
+      li.className = 'article-item';
+      li.innerHTML = `
+        <img class="article-avatar" src="https://i.pravatar.cc/40?img=5" alt="作者">
+        <div class="article-info">
+          <a class="article-title-link" href="detail.html?id=${post.id}">${post.title}</a>
+          <div class="article-meta">- ${post.date || ''}</div>
+          <span class="article-tag">${post.category || ''}</span>
+        </div>
+      `;
+      list.appendChild(li);
+    });
+  </script>
+</body>
+</html> 

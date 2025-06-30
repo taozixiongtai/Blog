@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>极简博客 - 详情</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="nav-logo" href="index.html">极简博客</a>
+      <div class="nav-menu">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link" href="catalog.html">Blog</a>
+        <button class="theme-toggle" id="theme-toggle" title="切换日夜模式">🌙</button>
+      </div>
+    </div>
+  </nav>
+  <main class="main-content">
+    <div class="detail-card">
+      <h1 class="detail-title" id="detail-title">Welcome to devlopr-jekyll !</h1>
+      <h2 class="detail-subtitle" id="detail-subtitle">Getting Started using devlopr-jekyll</h2>
+      <div class="detail-meta">
+        <span>Posted by : <span class="detail-author" id="detail-author">johndoe</span> on <span id="detail-date">May 22, 2019</span></span>
+      </div>
+      <div class="detail-category">Category : <span class="detail-category-tag" id="detail-category">jekyll</span></div>
+      <img class="detail-image" id="detail-image" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80" alt="主图">
+      <div class="detail-content" id="detail-content">
+        <p>这里是正文内容示例。你可以在 main.js 里为每篇文章配置不同的内容、图片、作者等信息。</p>
+      </div>
+      <div class="author-card">
+        <div class="author-card-title">About Sujay kundu</div>
+        <div class="author-card-body">
+          <img class="author-avatar" src="https://i.pravatar.cc/120?img=3" alt="作者头像">
+          <div class="author-info">
+            <div class="author-bio">Full Stack Web Developer, based in Bangalore, India</div>
+            <div class="author-email">Email : <a href="mailto:mail@sujaykundu.com">mail@sujaykundu.com</a></div>
+            <div class="author-website">Website : <a href="https://sujaykundu.com" target="_blank">https://sujaykundu.com</a></div>
+            <div class="author-socials">
+              <a href="#" title="GitHub"><svg width="22" height="22" fill="#f7b731" viewBox="0 0 24 24"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 2.9-.39c.98 0 1.97.13 2.9.39 2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.8 1.19 1.83 1.19 3.09 0 4.43-2.69 5.41-5.25 5.7.42.36.79 1.09.79 2.2 0 1.59-.01 2.87-.01 3.26 0 .31.21.68.8.56C20.71 21.39 24 17.08 24 12c0-6.27-5.23-11.5-12-11.5z"/></svg></a>
+              <a href="#" title="LinkedIn"><svg width="22" height="22" fill="#f7b731" viewBox="0 0 24 24"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm15.5 11.28h-3v-5.6c0-1.34-.03-3.07-1.87-3.07-1.87 0-2.16 1.46-2.16 2.97v5.7h-3v-10h2.89v1.36h.04c.4-.75 1.37-1.54 2.82-1.54 3.01 0 3.57 1.98 3.57 4.56v5.62z"/></svg></a>
+              <a href="#" title="YouTube"><svg width="22" height="22" fill="#f7b731" viewBox="0 0 24 24"><path d="M23.498 6.186a2.994 2.994 0 0 0-2.112-2.112C19.692 3.5 12 3.5 12 3.5s-7.692 0-9.386.574a2.994 2.994 0 0 0-2.112 2.112C0 7.88 0 12 0 12s0 4.12.502 5.814a2.994 2.994 0 0 0 2.112 2.112C4.308 20.5 12 20.5 12 20.5s7.692 0 9.386-.574a2.994 2.994 0 0 0 2.112-2.112C24 16.12 24 12 24 12s0-4.12-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+              <a href="#" title="Facebook"><svg width="22" height="22" fill="#f7b731" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.408.595 24 1.326 24H12.82v-9.294H9.692v-3.622h3.127V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.408 24 22.674V1.326C24 .592 23.406 0 22.675 0"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script src="main.js"></script>
+  <script>
+    // 主题切换按钮图标自适应
+    function updateThemeIcon() {
+      const btn = document.getElementById('theme-toggle');
+      if(document.body.classList.contains('dark')) {
+        btn.textContent = '☀️';
+      } else {
+        btn.textContent = '🌙';
+      }
+    }
+    updateThemeIcon();
+    const observer = new MutationObserver(updateThemeIcon);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+    // 动态渲染详情内容
+    function getQueryParam(name) {
+      const url = new URL(window.location.href);
+      return url.searchParams.get(name);
+    }
+    const id = getQueryParam('id');
+    const post = window.blogPosts && window.blogPosts.find(p => String(p.id) === id);
+    if (post) {
+      document.getElementById('detail-title').textContent = post.title || '';
+      document.getElementById('detail-subtitle').textContent = post.subtitle || '';
+      document.getElementById('detail-author').textContent = post.author || 'johndoe';
+      document.getElementById('detail-date').textContent = post.date || 'May 22, 2019';
+      document.getElementById('detail-category').textContent = post.category || 'jekyll';
+      document.getElementById('detail-image').src = post.image || 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80';
+      document.getElementById('detail-content').innerHTML = post.content || '';
+    }
+  </script>
+</body>
+</html> 
