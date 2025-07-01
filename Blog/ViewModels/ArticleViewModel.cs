@@ -1,4 +1,6 @@
-﻿namespace Blog.ViewModels;
+﻿using SqlSugar;
+
+namespace Blog.ViewModels;
 
 /// <summary>
 /// 文章视图模型，用于页面展示
@@ -44,4 +46,9 @@ public class ArticleViewModel
     /// 正文内容
     /// </summary>
     public string Content { get; set; }
+
+    /// <summary>
+    /// 最后修改日期
+    /// </summary>
+    public DateTime LastModifyDate { get; set; }
 }
