@@ -2,11 +2,20 @@
 
 namespace Blog.Models;
 
+/// <summary>
+/// 文章与分类的多对多关系表
+/// </summary>
 public class ArticleAndCategoryRelation
 {
-    [SugarColumn(IsPrimaryKey = true)]
+    /// <summary>
+    /// 文章ID
+    /// </summary>
+    [SugarColumn]
     public int ArticleId { get; set; }
 
-    [SugarColumn(IsPrimaryKey = true)]
+    /// <summary>
+    /// 分类ID
+    /// </summary>
+    [SugarColumn]
     public int CategoryId { get; set; }
 }

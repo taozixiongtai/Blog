@@ -8,13 +8,13 @@ namespace Blog.Models;
 public class Category
 {
     /// <summary>
-    /// 唯一表示
+    /// 分类唯一标识符。
     /// </summary>
-    [SugarColumn(IsPrimaryKey = true)]
+    [SugarColumn]
     public int Id { set; get; }
 
     /// <summary>
-    /// 分类名称
+    /// 分类名称。
     /// </summary>
     [SugarColumn]
     public string CategoryName { set; get; }

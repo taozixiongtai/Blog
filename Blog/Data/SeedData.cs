@@ -6,11 +6,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Blog.Data
 {
+    /// <summary>
+    /// 数据库种子数据初始化工具类
+    /// </summary>
     public static class SeedData
     {
+        /// <summary>
+        /// 初始化数据库种子数据
+        /// </summary>
+        /// <param name="db">SqlSugar 客户端实例</param>
         public static void Init(ISqlSugarClient db)
         {
-            // 检查并插入分类
+            // 插入分类数据
             if (db.Queryable<Category>().Count() == 0)
             {
                 var categories = new List<Category>
@@ -22,7 +29,7 @@ namespace Blog.Data
                 db.Insertable(categories).ExecuteCommand();
             }
 
-            // 检查并插入文章
+            // 插入文章数据
             if (db.Queryable<Article>().Count() == 0)
             {
                 var articles = new List<Article>
@@ -49,7 +56,7 @@ namespace Blog.Data
                 db.Insertable(articles).ExecuteCommand();
             }
 
-            // 检查并插入文章-分类关系
+            // 插入文章-分类关系数据
             if (db.Queryable<ArticleAndCategoryRelation>().Count() == 0)
             {
                 var relations = new List<ArticleAndCategoryRelation>

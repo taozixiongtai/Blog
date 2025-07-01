@@ -1,3 +1,4 @@
+// 入口程序，负责服务注册和中间件配置
 using Blog.Data;
 using Blog.Models; // 引入你的实体命名空间
 using SqlSugar;
@@ -20,7 +21,7 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
   //  sqlSugar.CodeFirst.InitTables(typeof(Article), typeof(Category), typeof(ArticleAndCategoryRelation));
     // 如果有更多实体，继续添加
     return sqlSugar;
-});
+}); 
 
 
 var app = builder.Build();

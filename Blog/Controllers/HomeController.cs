@@ -3,21 +3,24 @@ using Blog.Models;
 using Microsoft.AspNetCore.Mvc;
 using SqlSugar;
 using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace Blog.Controllers;
 
-public class HomeController : Controller
+/// <summary>
+/// 主页相关控制器
+/// </summary>
+/// <remarks>
+/// 构造函数
+/// </remarks>
+/// <param name="client">数据库客户端</param>
+public class HomeController(ISqlSugarClient client) : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    private readonly ISqlSugarClient _client;
+    private readonly ISqlSugarClient _client = client;
 
-    public HomeController(ILogger<HomeController> logger, ISqlSugarClient client)
-    {
-        _logger = logger;
-        _client = client;
-    }
-
+    /// <summary>
+    /// 主页视图
+    /// </summary>
+    /// <returns>返回主页视图</returns>
     public async Task<IActionResult> Index()
     {
         var mapper = new ArticleMapper();
@@ -25,6 +28,10 @@ public class HomeController : Controller
         return View(mapper.ArticlesToArticleViewModels(articles));
     }
 
+    /// <summary>
+    /// 博客列表视图
+    /// </summary>
+    /// <returns>返回博客列表视图</returns>
     public async Task<IActionResult> BlogListAsync()
     {
         var mapper = new ArticleMapper();
@@ -32,6 +39,11 @@ public class HomeController : Controller
         return View(mapper.ArticlesToArticleViewModels(articles));
     }
 
+    /// <summary>
+    /// 博客详情视图
+    /// </summary>
+    /// <param name="id">博客 ID</param>
+    /// <returns>返回博客详情视图</returns>
     public async Task<IActionResult> DetailAsync(int id)
     {
         var mapper = new ArticleMapper();
@@ -39,6 +51,10 @@ public class HomeController : Controller
         return View(mapper.ArticleToArticleViewModel(article));
     }
 
+    /// <summary>
+    /// 错误视图
+    /// </summary>
+    /// <returns>返回错误视图</returns>
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
