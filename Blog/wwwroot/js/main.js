@@ -24,53 +24,7 @@
   }
 })();
 
-window.blogPosts = [
-  {
-    id: 1,
-    title: 'Welcome to devlopr-jekyll !',
-    subtitle: 'Getting Started using devlopr-jekyll',
-    author: 'johndoe',
-    date: 'May 22, 2019',
-    category: 'jekyll',
-    image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80',
-    content: `<p>这里是正文内容示例。你可以在 main.js 里为每篇文章配置不同的内容、图片、作者等信息。</p>`
-  },
-  {
-    id: 2,
-    title: 'Added Multi Author Support',
-    subtitle: 'Support for multiple authors in your blog',
-    author: 'johndoe',
-    date: 'Oct 24, 2020',
-    category: 'jekyll',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=900&q=80',
-    content: `<p>多作者支持示例内容。</p>`
-  },
-  {
-    id: 3,
-    title: 'Added Latex Support',
-    subtitle: 'You can now use LaTeX to write equations',
-    author: 'johndoe',
-    date: 'Oct 24, 2020',
-    category: 'jekyll',
-    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=900&q=80',
-    content: `<p>LaTeX 支持示例内容。</p>`
-  }
-];
-// 渲染文章列表
-const list = document.getElementById('post-list');
-window.blogPosts.forEach(post => {
-    const li = document.createElement('li');
-    li.className = 'article-item';
-    li.innerHTML = `
-    <img class="article-avatar" src="https://i.pravatar.cc/40?img=5" alt="作者">
-    <div class="article-info">
-        <a class="article-title-link" href="detail?id=${post.id}">${post.title}</a>
-        <div class="article-meta">- ${post.date || ''}</div>
-        <span class="article-tag">${post.category || ''}</span>
-    </div>
-              `;
-    list.appendChild(li);
-});
+ 
 // 首页打字机动效
 window.addEventListener('DOMContentLoaded', function() {
   var typewriter = document.getElementById('typewriter');
