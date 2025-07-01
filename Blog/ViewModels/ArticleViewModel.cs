@@ -15,16 +15,6 @@ public class ArticleViewModel
     public string Title { get; set; }
 
     /// <summary>
-    /// 文章副标题。
-    /// </summary>
-    public string Subtitle { get; set; }
-
-    /// <summary>
-    /// 作者名称。
-    /// </summary>
-    public string Author { get; set; }
-
-    /// <summary>
     /// 文章发布日期
     /// </summary>
     public DateTime Date { get; set; }

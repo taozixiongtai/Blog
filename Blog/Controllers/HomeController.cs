@@ -32,9 +32,11 @@ public class HomeController : Controller
         return View(mapper.ArticlesToArticleViewModels(articles));
     }
 
-    public IActionResult Detail()
+    public async Task<IActionResult> DetailAsync(int id)
     {
-        return View();
+        var mapper = new ArticleMapper();
+        var article = await _client.Queryable<Article>().Includes(s => s.Categories).FirstAsync(s => s.Id == id);
+        return View(mapper.ArticleToArticleViewModel(article));
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

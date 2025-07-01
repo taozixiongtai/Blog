@@ -20,18 +20,6 @@ public class Article
     public string Title { get; set; }
 
     /// <summary>
-    /// 文章副标题。
-    /// </summary>
-    [SugarColumn]
-    public string Subtitle { get; set; }
-
-    /// <summary>
-    /// 作者名称。
-    /// </summary>
-    [SugarColumn]
-    public string Author { get; set; }
-
-    /// <summary>
     /// 文章发布日期
     /// </summary>
     [SugarColumn]

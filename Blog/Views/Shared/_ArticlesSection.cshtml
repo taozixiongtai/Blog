@@ -1,19 +1,25 @@
 ﻿@model List<Blog.ViewModels.ArticleViewModel>
+@{
+    var showMore = ViewData["ShowMore"] as bool? ?? false;
+}
 
 <section class="articles-section">
-    <div class="articles-header">
-        <h2>最新文章</h2>
-        <a class="button view-all-btn" href="catalog.html">查看更多</a>
-    </div>
+    @if (showMore)
+    {
+        <div class="articles-header">
+            <h2>最新随笔</h2>
+            <a class="button view-all-btn" href="/home/BlogList">查看更多</a>
+        </div>
+    }
     <ul class="articles-list">
         @foreach (var article in Model)
         {
             <li class="article-item">
                 <img class="article-avatar" src=" @article.Image" alt="作者">
                 <div class="article-info">
-                    <a class="article-title-link" href="detail?id=@article.Id">@article.Title</a>
+                    <a class="article-title-link" href="/home/detail?id=@article.Id">@article.Title</a>
                     <span class="article-meta">- @article.Date</span>
-                    <span class="article-tag"> @article.Categories.ToString()</span>
+                    <span class="article-tag"> @string.Join(" ", article.Categories)</span>
                 </div>
             </li>
         }

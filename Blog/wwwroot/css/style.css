@@ -223,11 +223,9 @@ h1, h2, h3 {
   filter: brightness(0.92);
   box-shadow: 0 4px 16px rgba(33,118,255,0.10);
 }
-
-.main-content {
-  background: var(--bg);
-  min-height: 400px;
-  padding: 0 0 3rem 0;
+.hero-btn-yellow {
+  background: #ffc107;
+  color: #222;
 }
 .articles-section {
   max-width: 800px;
@@ -358,7 +356,7 @@ h1, h2, h3 {
   color: #bdbdbd;
   margin-bottom: 0.7em;
 }
-.detail-author {
+.detail-date {
   color: #2176ff;
   font-weight: 500;
 }

@@ -31,8 +31,6 @@ namespace Blog.Data
                     {
                         Id = 1,
                         Title = "欢迎使用极简博客",
-                        Subtitle = "快速上手你的第一个博客",
-                        Author = "admin",
                         Date = DateTime.Now.AddDays(-10),
                         Image = "https://i.pravatar.cc/120?img=3",
                         Content = "<p>这是第一篇文章内容。</p>",
@@ -42,8 +40,6 @@ namespace Blog.Data
                     {
                         Id = 2,
                         Title = "生活点滴",
-                        Subtitle = "记录生活的美好",
-                        Author = "user1",
                         Date = DateTime.Now.AddDays(-8),
                         Image = "https://i.pravatar.cc/120?img=4",
                         Content = "<p>生活随笔内容。</p>",

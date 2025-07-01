@@ -55,6 +55,27 @@ updateThemeIcon();
 const observer = new MutationObserver(updateThemeIcon);
 observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 
+// 搜索弹窗逻辑
+const searchModal = document.getElementById('search-modal');
+const navSearchBtn = document.getElementById('nav-search-btn');
+const searchModalClose = document.getElementById('search-modal-close');
+const searchModalInput = document.getElementById('search-modal-input');
+navSearchBtn.onclick = () => {
+    searchModal.classList.add('active');
+    setTimeout(() => searchModalInput.focus(), 200);
+    document.body.style.overflow = 'hidden';
+};
+searchModalClose.onclick = () => {
+    searchModal.classList.remove('active');
+    document.body.style.overflow = '';
+};
+// esc关闭
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        searchModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+});
 
    
  
