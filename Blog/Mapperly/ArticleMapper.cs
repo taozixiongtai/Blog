@@ -11,9 +11,7 @@ namespace Blog.Mapperly;
 public partial class ArticleMapper
 {
 
-    /// <summary>
-    /// List&lt;Category&gt; 转 List&lt;string&gt;（分类名）
-    /// </summary>
+   
     [MapProperty(
         source: nameof(Article.Categories),
         target: nameof(ArticleViewModel.Categories)
@@ -26,7 +24,7 @@ public partial class ArticleMapper
       target: nameof(ArticleViewModel.CategoryImage)
   )]
     private string MapCategoryImage(List<Category> categories)
-      => categories.FirstOrDefault().Image ?? string.Empty;
+      => categories.FirstOrDefault()?.Image ?? string.Empty;
 
     public partial List<ArticleViewModel> ArticlesToArticleViewModels(List<Article> articles);
 

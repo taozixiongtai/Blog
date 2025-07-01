@@ -15,7 +15,7 @@
         @foreach (var article in Model)
         {
             <li class="article-item">
-                <img class="article-avatar" src=" @article.Image" alt="作者">
+                <img class="article-avatar" src=" @article.CategoryImage" alt="作者">
                 <div class="article-info">
                     <a class="article-title-link" href="/home/detail?id=@article.Id">@article.Title</a>
                     <span class="article-meta">- @article.Date</span>

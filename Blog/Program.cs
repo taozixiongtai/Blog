@@ -18,7 +18,7 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
     });
 
     // 自动建库和建表
-  //  sqlSugar.CodeFirst.InitTables(typeof(Article), typeof(Category), typeof(ArticleAndCategoryRelation));
+   sqlSugar.CodeFirst.InitTables(typeof(Article), typeof(Category), typeof(ArticleAndCategoryRelation));
     // 如果有更多实体，继续添加
     return sqlSugar;
 }); 
