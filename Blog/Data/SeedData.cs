@@ -22,9 +22,9 @@ namespace Blog.Data
             {
                 var categories = new List<Category>
                 {
-                    new Category { Id = 1, CategoryName = "技术" },
-                    new Category { Id = 2, CategoryName = "生活" },
-                    new Category { Id = 3, CategoryName = "随笔" }
+                    new Category { Id = 1, Name = "技术" },
+                    new Category { Id = 2, Name = "生活" },
+                    new Category { Id = 3, Name = "随笔" }
                 };
                 db.Insertable(categories).ExecuteCommand();
             }
@@ -39,7 +39,6 @@ namespace Blog.Data
                         Id = 1,
                         Title = "欢迎使用极简博客",
                         Date = DateTime.Now.AddDays(-10),
-                        Image = "https://i.pravatar.cc/120?img=3",
                         Content = "<p>这是第一篇文章内容。</p>",
                         LastModifyDate = DateTime.Now.AddDays(-5)
                     },
@@ -48,7 +47,6 @@ namespace Blog.Data
                         Id = 2,
                         Title = "生活点滴",
                         Date = DateTime.Now.AddDays(-8),
-                        Image = "https://i.pravatar.cc/120?img=4",
                         Content = "<p>生活随笔内容。</p>",
                         LastModifyDate = DateTime.Now.AddDays(-3)
                     }

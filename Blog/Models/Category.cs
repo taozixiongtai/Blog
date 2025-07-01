@@ -17,5 +17,11 @@ public class Category
     /// 分类名称。
     /// </summary>
     [SugarColumn]
-    public string CategoryName { set; get; }
+    public string Name { set; get; }
+
+    /// <summary>
+    /// 分类的图标
+    /// </summary>
+    [SugarColumn]
+    public string Image { set; get; }
 }

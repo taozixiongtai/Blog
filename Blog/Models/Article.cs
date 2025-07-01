@@ -26,12 +26,6 @@ public class Article
     public DateTime Date { get; set; }
 
     /// <summary>
-    /// 文章封面图片URL。
-    /// </summary>
-    [SugarColumn]
-    public string Image { get; set; }
-
-    /// <summary>
     /// 文章正文内容（HTML格式）。
     /// </summary>
     [SugarColumn]

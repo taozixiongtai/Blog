@@ -40,7 +40,7 @@ public class ArticleViewModel
     /// <summary>
     /// 封面图片
     /// </summary>
-    public string Image { get; set; }
+    public string CategoryImage { get; set; }
 
     /// <summary>
     /// 正文内容

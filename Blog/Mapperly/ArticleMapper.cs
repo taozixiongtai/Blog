@@ -19,7 +19,14 @@ public partial class ArticleMapper
         target: nameof(ArticleViewModel.Categories)
     )]
     private List<string> MapCategories(List<Category> categories)
-        => categories?.Select(c => c.CategoryName).ToList() ?? new List<string>();
+        => categories?.Select(c => c.Name).ToList() ?? new List<string>();
+
+    [MapProperty(
+      source: nameof(Article.Categories),
+      target: nameof(ArticleViewModel.CategoryImage)
+  )]
+    private string MapCategoryImage(List<Category> categories)
+      => categories.FirstOrDefault().Image ?? string.Empty;
 
     public partial List<ArticleViewModel> ArticlesToArticleViewModels(List<Article> articles);
 
