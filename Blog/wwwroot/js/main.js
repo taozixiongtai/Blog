@@ -1,7 +1,9 @@
 // 主题切换逻辑
-(function() {
+(function () {
+ 
   const themeBtn = document.getElementById('theme-toggle');
     const setTheme = (dark) => {
+    
     if (dark) {
       document.body.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -54,7 +56,21 @@ window.blogPosts = [
     content: `<p>LaTeX 支持示例内容。</p>`
   }
 ];
-
+// 渲染文章列表
+const list = document.getElementById('post-list');
+window.blogPosts.forEach(post => {
+    const li = document.createElement('li');
+    li.className = 'article-item';
+    li.innerHTML = `
+    <img class="article-avatar" src="https://i.pravatar.cc/40?img=5" alt="作者">
+    <div class="article-info">
+        <a class="article-title-link" href="detail?id=${post.id}">${post.title}</a>
+        <div class="article-meta">- ${post.date || ''}</div>
+        <span class="article-tag">${post.category || ''}</span>
+    </div>
+              `;
+    list.appendChild(li);
+});
 // 首页打字机动效
 window.addEventListener('DOMContentLoaded', function() {
   var typewriter = document.getElementById('typewriter');
@@ -71,3 +87,20 @@ window.addEventListener('DOMContentLoaded', function() {
     typing();
   }
 });
+
+// 主题切换按钮图标自适应
+function updateThemeIcon() {
+    const btn = document.getElementById('theme-toggle');
+    if (document.body.classList.contains('dark')) {
+        btn.textContent = '☀️';
+    } else {
+        btn.textContent = '🌙';
+    }
+}
+updateThemeIcon();
+const observer = new MutationObserver(updateThemeIcon);
+observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+
+
+   
+ 

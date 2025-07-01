@@ -18,7 +18,12 @@ namespace Blog.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult BlogList()
+        {
+            return View();
+        }
+
+        public IActionResult Detail()
         {
             return View();
         }

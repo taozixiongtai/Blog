@@ -4,46 +4,58 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Blog</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Blog.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Blog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        <nav class="navbar">
+            <div class="navbar-inner">
+                <a class="nav-logo" href="index.html">极简博客</a>
+                <div class="nav-menu">
+                    <a class="nav-link" asp-controller="Home" asp-action="index"  >Home</a>
+                    <a class="nav-link" asp-controller="Home" asp-action="BlogList">Blog</a>
+                    <button class="nav-search-btn" id="nav-search-btn" title="搜索"><svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="10" cy="10" r="7" stroke="#fff" stroke-width="2" /><line x1="16.0607" y1="16.6464" x2="20" y2="20.5858" stroke="#fff" stroke-width="2" stroke-linecap="round" /></svg></button>
+                    <button class="theme-toggle" id="theme-toggle" title="切换日夜模式">🌙</button>
                 </div>
             </div>
         </nav>
+        <div class="search-modal" id="search-modal">
+            <button class="search-modal-close" id="search-modal-close" title="关闭">&times;</button>
+            <input type="text" class="search-modal-input" id="search-modal-input" placeholder="Type to Search...">
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+    <script src="/js/main.js?v=1" asp-append-version="true"></script>
+    <script>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Blog - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+        // 搜索弹窗逻辑
+        const searchModal = document.getElementById('search-modal');
+        const navSearchBtn = document.getElementById('nav-search-btn');
+        const searchModalClose = document.getElementById('search-modal-close');
+        const searchModalInput = document.getElementById('search-modal-input');
+        navSearchBtn.onclick = () => {
+          searchModal.classList.add('active');
+          setTimeout(() => searchModalInput.focus(), 200);
+          document.body.style.overflow = 'hidden';
+        };
+        searchModalClose.onclick = () => {
+          searchModal.classList.remove('active');
+          document.body.style.overflow = '';
+        };
+        // esc关闭
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape') {
+            searchModal.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+
+      
+    </script>
 </body>
 </html>

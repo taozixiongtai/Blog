@@ -1,8 +1,47 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+﻿ 
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <img class="hero-avatar" src="https://i.pravatar.cc/120?img=3" alt="头像">
+      <h1 class="hero-title">Hi, I am John Doe !</h1>
+      <p class="hero-desc"><span id="typewriter" data-text="devlopr is a jekyll framework built for developers. You can edit this in _config.yml file"></span></p>
+      <div class="hero-btns">
+        <a class="button hero-btn" href="catalog.html" style="background:#ffc107;color:#222;">Get Started</a>
+        <a class="button hero-btn hero-btn-outline" href="#" style="background:#fff;color:#222;border:1.5px solid #222;">What's New</a>
+      </div>
+    </div>
+  </header>
+   <main class="main-content">
+    <section class="articles-section">
+      <div class="articles-header">
+        <h2>Recent Articles</h2>
+        <a class="button view-all-btn" href="catalog.html">View All</a>
+      </div>
+      <ul class="articles-list">
+        <li class="article-item">
+          <img class="article-avatar" src="https://i.pravatar.cc/40?img=5" alt="作者">
+          <div class="article-info">
+            <a class="article-title-link" href="detail.html?id=1">Adding Multiple Categories in Posts</a>
+            <span class="article-meta">- Feb 27, 2021</span>
+            <span class="article-tag">jekyll</span>
+          </div>
+        </li>
+        <li class="article-item">
+          <img class="article-avatar" src="https://i.pravatar.cc/40?img=5" alt="作者">
+          <div class="article-info">
+            <a class="article-title-link" href="detail.html?id=2">Added Multi Author Support</a>
+            <span class="article-meta">- Oct 24, 2020</span>
+            <span class="article-tag">jekyll</span>
+          </div>
+        </li>
+        <li class="article-item">
+          <img class="article-avatar" src="https://i.pravatar.cc/40?img=5" alt="作者">
+          <div class="article-info">
+            <a class="article-title-link" href="detail.html?id=3">Added Latex Support</a>
+            <span class="article-meta">- Oct 24, 2020</span>
+            <span class="article-tag">jekyll</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
