@@ -1,5 +1,6 @@
-using SqlSugar;
+using Blog.Data;
 using Blog.Models; // 引入你的实体命名空间
+using SqlSugar;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,13 +17,19 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
     });
 
     // 自动建库和建表
-    sqlSugar.CodeFirst.InitTables(typeof(Article), typeof(Category));
+  //  sqlSugar.CodeFirst.InitTables(typeof(Article), typeof(Category), typeof(ArticleAndCategoryRelation));
     // 如果有更多实体，继续添加
-
     return sqlSugar;
 });
 
+
 var app = builder.Build();
+
+// 自动建表
+//var db = app.Services.GetRequiredService<ISqlSugarClient>();
+//db.CodeFirst.InitTables(typeof(Article), typeof(Category), typeof(ArticleAndCategoryRelation));
+// 初始化种子数据
+//SeedData.Init(db);
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

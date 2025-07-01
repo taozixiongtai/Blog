@@ -10,7 +10,7 @@ public class Category
     /// <summary>
     /// 唯一表示
     /// </summary>
-    [SugarColumn]
+    [SugarColumn(IsPrimaryKey = true)]
     public int Id { set; get; }
 
     /// <summary>

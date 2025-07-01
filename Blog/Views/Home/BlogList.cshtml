@@ -1,6 +1,4 @@
-﻿<main class="main-content">
-    @await Html.PartialAsync("_ArticlesSection")
+﻿@model List<Blog.ViewModels.ArticleViewModel>
+<main class="main-content">
+    @await Html.PartialAsync("_ArticlesSection", Model)
 </main>
-<script>
-        
-</script>
