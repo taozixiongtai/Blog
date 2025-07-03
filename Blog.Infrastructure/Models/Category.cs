@@ -1,6 +1,6 @@
 ﻿using SqlSugar;
 
-namespace Blog.Models;
+namespace Blog.Infrastructure.Models;
 
 /// <summary>
 /// 分类实体类

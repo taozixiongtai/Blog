@@ -1,8 +1,8 @@
-using Blog.Models;
 using SqlSugar;
 using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
+using Blog.Infrastructure.Models;
 
 namespace Blog.Data
 {

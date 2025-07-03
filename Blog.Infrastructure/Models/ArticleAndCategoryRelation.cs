@@ -1,6 +1,6 @@
 ﻿using SqlSugar;
 
-namespace Blog.Models;
+namespace Blog.Infrastructure.Models;
 
 /// <summary>
 /// 文章与分类的多对多关系表

@@ -1,6 +1,6 @@
 // 入口程序，负责服务注册和中间件配置
 using Blog.Data;
-using Blog.Models; // 引入你的实体命名空间
+using Blog.Infrastructure.Models;
 using SqlSugar;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,4 +1,4 @@
-﻿using Blog.Models;
+﻿using Blog.Infrastructure.Models;
 using Blog.ViewModels;
 using Riok.Mapperly.Abstractions;
 

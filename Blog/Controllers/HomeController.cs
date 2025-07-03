@@ -1,3 +1,4 @@
+using Blog.Infrastructure.Models;
 using Blog.Mapperly;
 using Blog.Models;
 using Microsoft.AspNetCore.Mvc;

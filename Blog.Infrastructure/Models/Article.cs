@@ -1,6 +1,6 @@
 ﻿using SqlSugar;
 
-namespace Blog.Models;
+namespace Blog.Infrastructure.Models;
 
 /// <summary>
 /// 表示一篇博客文章的实体类。

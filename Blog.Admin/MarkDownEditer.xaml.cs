@@ -20,41 +20,33 @@ namespace Blog.Admin
     /// MarkDownEditer.xaml 的交互逻辑
     /// </summary>
     public partial class MarkDownEditer : Window
-    {
+    {               
+        private MarkdownPipeline pipeline;
+
         public MarkDownEditer()
         {
             InitializeComponent();
-            // 初始化Markdown管道（可以添加各种扩展）
-            var pipeline = new MarkdownPipelineBuilder()
+            // 初始化Markdown管道
+            pipeline = new MarkdownPipelineBuilder()
                 .UseSupportedExtensions()
                 .Build();
 
-            // 设置Markdown内容
-            string markdownText = @"
-# Markdig.Wpf 示例
-
-这是一个使用 **Markdig.Wpf** 的示例。
-
-## 功能列表
-
-- Markdown 渲染
-- 语法高亮
-- 表格支持
-- 任务列表
-- 等等...
-
-```csharp
-// 代码块示例
-public class Program
-{
-    public static void Main()
-    {
-        Console.WriteLine(""Hello Markdig!"");
-    }
-}";
-            MarkdownViewer.Markdown = markdownText;
+            // Mock 下拉框数据
+            CategoryComboBox.ItemsSource = new List<string> { "技术", "生活", "随笔", "教程" };
+            CategoryComboBox.SelectedIndex = 0;
             MarkdownViewer.Pipeline = pipeline;
+        }
+
+        private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            MarkdownViewer.Markdown = MarkdownTextBox.Text;
+        }
+
+        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedCategory = CategoryComboBox.SelectedItem as string;
+            string markdownContent = MarkdownTextBox.Text;
+            MessageBox.Show($"分类: {selectedCategory}\n内容:\n{markdownContent.Substring(0, Math.Min(100, markdownContent.Length))}...", "提交内容预览");
         }
     }
 }
- 

@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <PackageReference Include="Riok.Mapperly" Version="4.2.1" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.197" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,6 +25,10 @@
   <ItemGroup>
     <Folder Include="Helper\" />
     <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
