@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Riok.Mapperly" Version="4.2.1" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\css\style.css" />
     <None Include="wwwroot\js\main.js" />
   </ItemGroup>

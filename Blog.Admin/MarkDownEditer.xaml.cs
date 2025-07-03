@@ -1,52 +1,65 @@
-﻿using Markdig;
+﻿using Blog.Admin.Mapperly;
+using Blog.Infrastructure.Models;
+using Blog.Infrastructure.SqlSugar;
+using Markdig;
 using Markdig.Wpf;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace Blog.Admin
+namespace Blog.Admin;
+
+/// <summary>
+/// MarkDownEditer.xaml 的交互逻辑
+/// </summary>
+public partial class MarkDownEditer : Window
 {
-    /// <summary>
-    /// MarkDownEditer.xaml 的交互逻辑
-    /// </summary>
-    public partial class MarkDownEditer : Window
-    {               
-        private MarkdownPipeline pipeline;
+    private MarkdownPipeline pipeline;
+    private Article _article;
+    private bool IsModify = false;
 
-        public MarkDownEditer()
+    public MarkDownEditer(int? id = null)
+    {
+        InitializeComponent();
+        // 初始化Markdown管道
+        pipeline = new MarkdownPipelineBuilder()
+            .UseSupportedExtensions()
+            .Build();
+
+        if (id.HasValue)
         {
-            InitializeComponent();
-            // 初始化Markdown管道
-            pipeline = new MarkdownPipelineBuilder()
-                .UseSupportedExtensions()
-                .Build();
-
-            // Mock 下拉框数据
-            CategoryComboBox.ItemsSource = new List<string> { "技术", "生活", "随笔", "教程" };
-            CategoryComboBox.SelectedIndex = 0;
-            MarkdownViewer.Pipeline = pipeline;
+            var mapper = new ArticleMapper();
+            _article = SqlSugarHelper.Db.Queryable<Article>().First(s => s.Id == id);
+            MarkdownViewer.Markdown = _article.Content;
+            IsModify = true;
         }
 
-        private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        var category = SqlSugarHelper.Db.Queryable<Category>().ToDictionary(s => s.Id, s => s.Name);
+        // Mock 下拉框数据
+        CategoryComboBox.ItemsSource = category;
+        CategoryComboBox.SelectedIndex = 0;
+        MarkdownViewer.Pipeline = pipeline;
+    }
+
+    private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        MarkdownViewer.Markdown = MarkdownTextBox.Text;
+    }
+
+    private async void SubmitButton_Click(object sender, RoutedEventArgs e)
+    {
+        var selectedCategory = CategoryComboBox.SelectedItem as KeyValuePair<int, string>?;
+        if (selectedCategory == null)
         {
-            MarkdownViewer.Markdown = MarkdownTextBox.Text;
+            MessageBox.Show("请选择分类");
+            return;
+        }
+        if (IsModify)
+        {
+            _article.Content = MarkdownTextBox.Text;
+            await SqlSugarHelper.Db.Updateable(_article).ExecuteCommandAsync();
+            SqlSugarHelper.Db.Deleteable<ArticleAndCategoryRelation>().Where(s => s.ArticleId == _article.Id);
         }
 
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
-        {
-            string selectedCategory = CategoryComboBox.SelectedItem as string;
-            string markdownContent = MarkdownTextBox.Text;
-            MessageBox.Show($"分类: {selectedCategory}\n内容:\n{markdownContent.Substring(0, Math.Min(100, markdownContent.Length))}...", "提交内容预览");
-        }
     }
 }

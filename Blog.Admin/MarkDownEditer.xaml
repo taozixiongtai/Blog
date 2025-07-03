@@ -9,7 +9,9 @@
     <DockPanel>
         <!-- 顶部工具栏 -->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#eaeaea" Height="48" VerticalAlignment="Center" Margin="0,0,0,4">
-            <ComboBox x:Name="CategoryComboBox" Width="180" Height="28" Margin="16,0,0,0" VerticalAlignment="Center"/>
+            <ComboBox x:Name="CategoryComboBox"
+                      DisplayMemberPath="Value"
+          SelectedValuePath="Key" Width="180" Height="28" Margin="16,0,0,0" VerticalAlignment="Center"/>
             <Button x:Name="SubmitButton" Content="提交" Width="80" Height="28" Margin="16,0,0,0" VerticalAlignment="Center" Click="SubmitButton_Click" Background="#4CAF50" Foreground="White" FontWeight="Bold"/>
         </StackPanel>
         <!-- 主体内容 -->
