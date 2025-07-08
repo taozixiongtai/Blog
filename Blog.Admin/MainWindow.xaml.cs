@@ -72,13 +72,10 @@ public partial class MainWindow : Window
     /// </summary>
     private async void DeleteArticle_Click(object sender, RoutedEventArgs e)
     {
-        if (ArticleDataGrid.SelectedItem is ArticleViewModel article)
+        if (ArticleDataGrid.SelectedItem is ArticleViewModel article && MessageBox.Show($"确定要删除“{article.Title}”吗？", "确认删除", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
         {
-            if (MessageBox.Show($"确定要删除“{article.Title}”吗？", "确认删除", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-            {
-                await SqlSugarHelper.Db.Deleteable<Article>().Where(s => s.Id == article.Id).ExecuteCommandAsync();
-                await LoadDataAsync();
-            }
+            await SqlSugarHelper.Db.Deleteable<Article>().Where(s => s.Id == article.Id).ExecuteCommandAsync();
+            await LoadDataAsync();
         }
     }
     #endregion
