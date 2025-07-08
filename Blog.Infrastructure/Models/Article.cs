@@ -10,7 +10,7 @@ public class Article
     /// <summary>
     /// 文章唯一标识符。
     /// </summary>
-    [SugarColumn(IsPrimaryKey = true)]
+    [SugarColumn(IsPrimaryKey = true, IsIdentity = true)]
     public int Id { get; set; }
 
     /// <summary>

@@ -14,8 +14,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
                 <DataGridTextColumn Header="标题" Binding="{Binding Title}" Width="*"/>
-                <DataGridTextColumn Header="分类" Binding="{Binding Category}" Width="120"/>
-                <DataGridTextColumn Header="创建时间" Binding="{Binding CreatedAt}" Width="160"/>
+                <DataGridTextColumn Header="分类" Binding="{Binding CategoryString}" Width="120"/>
+                <DataGridTextColumn Header="创建时间" Binding="{Binding Date}" Width="160"/>
                 <DataGridTemplateColumn Header="操作" Width="160">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

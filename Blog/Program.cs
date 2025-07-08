@@ -1,6 +1,7 @@
 // 入口程序，负责服务注册和中间件配置
 using Blog.Data;
 using Blog.Infrastructure.Models;
+using Blog.Infrastructure.SqlSugar;
 using SqlSugar;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,10 +19,10 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
     });
 
     // 自动建库和建表
-   sqlSugar.CodeFirst.InitTables(typeof(Article), typeof(Category), typeof(ArticleAndCategoryRelation));
+    SqlSugarHelper.InitDataBase(sqlSugar);
     // 如果有更多实体，继续添加
     return sqlSugar;
-}); 
+});
 
 
 var app = builder.Build();

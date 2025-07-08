@@ -28,6 +28,11 @@ public class ArticleViewModel
     public List<string> Categories { get; set; }
 
     /// <summary>
+    /// 分类名称
+    /// </summary>
+    public string CategoryString => string.Join(",", Categories);
+
+    /// <summary>
     /// 封面图片
     /// </summary>
     public string CategoryImage { get; set; }
