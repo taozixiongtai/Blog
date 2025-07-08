@@ -31,12 +31,12 @@ public partial class MarkDownEditer : Window
         {
             var mapper = new ArticleMapper();
             _article = SqlSugarHelper.Db.Queryable<Article>().First(s => s.Id == id);
-            MarkdownViewer.Markdown = _article.Content;
+            MarkdownTextBox.Text = _article.Content;
+            TitleTextBox.Text = _article.Title;
             IsModify = true;
         }
 
         var category = SqlSugarHelper.Db.Queryable<Category>().ToDictionary(s => s.Id, s => s.Name);
-        // Mock 下拉框数据
         CategoryComboBox.ItemsSource = category;
         CategoryComboBox.SelectedIndex = 0;
         MarkdownViewer.Pipeline = pipeline;
@@ -70,6 +70,9 @@ public partial class MarkDownEditer : Window
                 CategoryId = int.Parse(selectedCategory.Value.Key)
             };
             await SqlSugarHelper.Db.Insertable(modifyCategory).ExecuteCommandAsync();
+            MessageBox.Show("修改成功");
+            this.Close();
+            return;
         }
 
         _article = new();

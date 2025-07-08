@@ -7,26 +7,58 @@
         mc:Ignorable="d"
         Title="文章管理" Height="500" Width="900">
     <DockPanel>
-        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#f7f7f7" Height="48" VerticalAlignment="Center">
-            <Button Content="新增文章" Width="100" Height="32" Margin="16,8,0,8" Click="AddArticle_Click" Background="#4CAF50" Foreground="White" FontWeight="Bold"/>
-        </StackPanel>
-        <DataGrid x:Name="ArticleDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" IsReadOnly="True">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
-                <DataGridTextColumn Header="标题" Binding="{Binding Title}" Width="*"/>
-                <DataGridTextColumn Header="分类" Binding="{Binding CategoryString}" Width="120"/>
-                <DataGridTextColumn Header="创建时间" Binding="{Binding Date}" Width="160"/>
-                <DataGridTemplateColumn Header="操作" Width="160">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="修改" Width="60" Margin="4,0" Click="EditArticle_Click"/>
-                                <Button Content="删除" Width="60" Margin="4,0" Click="DeleteArticle_Click" Background="#F44336" Foreground="White"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <TabControl x:Name="MainTabControl">
+            <!-- 文章管理Tab -->
+            <TabItem Header="文章管理">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#f7f7f7" Height="48" VerticalAlignment="Center">
+                        <Button Content="新增文章" Width="100" Height="32" Margin="16,8,0,8" Click="AddArticle_Click" Background="#4CAF50" Foreground="White" FontWeight="Bold"/>
+                    </StackPanel>
+                    <DataGrid x:Name="ArticleDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                            <DataGridTextColumn Header="标题" Binding="{Binding Title}" Width="*"/>
+                            <DataGridTextColumn Header="分类" Binding="{Binding CategoryString}" Width="120"/>
+                            <DataGridTextColumn Header="创建时间" Binding="{Binding Date}" Width="160"/>
+                            <DataGridTemplateColumn Header="操作" Width="160">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="修改" Width="60" Margin="4,0" Click="EditArticle_Click"/>
+                                            <Button Content="删除" Width="60" Margin="4,0" Click="DeleteArticle_Click" Background="#F44336" Foreground="White"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+            <!-- 分类管理Tab -->
+            <TabItem Header="分类管理">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#f7f7f7" Height="48" VerticalAlignment="Center">
+                        <Button Content="新增分类" Width="100" Height="32" Margin="16,8,0,8" Click="AddCategory_Click" Background="#2196F3" Foreground="White" FontWeight="Bold"/>
+                    </StackPanel>
+                    <DataGrid x:Name="CategoryDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="60"/>
+                            <DataGridTextColumn Header="名称" Binding="{Binding Name}" Width="*"/>
+                            <DataGridTextColumn Header="图标" Binding="{Binding Image}" Width="160"/>
+                            <DataGridTemplateColumn Header="操作" Width="160">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Content="修改" Width="60" Margin="4,0" Click="EditCategory_Click"/>
+                                            <Button Content="删除" Width="60" Margin="4,0" Click="DeleteCategory_Click" Background="#F44336" Foreground="White"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>

@@ -1,8 +1,5 @@
-using SqlSugar;
-using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
 using Blog.Infrastructure.Models;
+using SqlSugar;
 
 namespace Blog.Data
 {
@@ -22,9 +19,9 @@ namespace Blog.Data
             {
                 var categories = new List<Category>
                 {
-                    new Category { Id = 1, Name = "技术" },
-                    new Category { Id = 2, Name = "生活" },
-                    new Category { Id = 3, Name = "随笔" }
+                    new Category { Id = 1, Name = "技术" , Image="" },
+                    new Category { Id = 2, Name = "生活", Image=""  },
+                    new Category { Id = 3, Name = "随笔", Image="" }
                 };
                 db.Insertable(categories).ExecuteCommand();
             }

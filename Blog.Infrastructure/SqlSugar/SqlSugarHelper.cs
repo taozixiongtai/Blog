@@ -1,7 +1,9 @@
-﻿using SqlSugar;
+﻿using Blog.Data;
+using SqlSugar;
 using System.Reflection;
 
 namespace Blog.Infrastructure.SqlSugar;
+
 public class SqlSugarHelper //不能是泛型类
 {
     public static SqlSugarScope Db = new(new ConnectionConfig()
@@ -34,7 +36,9 @@ public class SqlSugarHelper //不能是泛型类
             .ToList();
 
         db.CodeFirst.InitTables(entityTypes.ToArray());
-    }
 
+        // 初始化种子数据
+        SeedData.Init(db);
+    }
 
 }

@@ -5,6 +5,7 @@ namespace Blog.Infrastructure.Models;
 /// <summary>
 /// 文章与分类的多对多关系表
 /// </summary>
+[SugarTable]
 public class ArticleAndCategoryRelation
 {
     /// <summary>

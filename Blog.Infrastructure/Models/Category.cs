@@ -5,6 +5,7 @@ namespace Blog.Infrastructure.Models;
 /// <summary>
 /// 分类实体类
 /// </summary>
+[SugarTable]
 public class Category
 {
     /// <summary>

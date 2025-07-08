@@ -5,6 +5,7 @@ namespace Blog.Infrastructure.Models;
 /// <summary>
 /// 表示一篇博客文章的实体类。
 /// </summary>
+[SugarTable]
 public class Article
 {
     /// <summary>
@@ -26,10 +27,16 @@ public class Article
     public DateTime Date { get; set; }
 
     /// <summary>
-    /// 文章正文内容（HTML格式）。
+    /// 文章正文内容（markDown格式）。
     /// </summary>
     [SugarColumn]
     public string Content { get; set; }
+
+    /// <summary>
+    /// 文章正文内容（html格式）。
+    /// </summary>
+    [SugarColumn(IsNullable = true)]
+    public string? ContentHtml { set; get; }
 
     /// <summary>
     /// 最后修改日期
