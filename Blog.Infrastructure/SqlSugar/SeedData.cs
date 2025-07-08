@@ -58,7 +58,6 @@ public static class SeedData
             {
                 new ArticleAndCategoryRelation { ArticleId = 1, CategoryId = 1 },
                 new ArticleAndCategoryRelation { ArticleId = 2, CategoryId = 2 },
-                // 假如有多分类
                 new ArticleAndCategoryRelation { ArticleId = 1, CategoryId = 3 }
             };
             db.Insertable(relations).ExecuteCommand();

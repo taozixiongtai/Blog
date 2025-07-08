@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Blog.Infrastructure.SqlSugar;
+using System.Windows;
 
 namespace Blog.Admin;
 /// <summary>
@@ -6,5 +7,15 @@ namespace Blog.Admin;
 /// </summary>
 public partial class App : Application
 {
+
+    /// <summary>
+    /// Raises the System.Windows.Application.Startup event.
+    /// </summary>
+    /// <param name="e"></param>
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
+        SqlSugarHelper.InitDataBase();
+    }
 }
 

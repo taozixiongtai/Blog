@@ -12,6 +12,10 @@ public class SqlSugarHelper //不能是泛型类
         IsAutoCloseConnection = true
     });
 
+    /// <summary>
+    /// 初始化数据库
+    /// </summary>
+    /// <param name="db"></param>
     public static void InitDataBase(SqlSugarScope db = null)
     {
         if (db == null)

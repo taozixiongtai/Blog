@@ -20,16 +20,20 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Loaded += async (s, e) =>
-        {
-            await LoadDataAsync();
-            await LoadCategoryDataAsync();
-        };
-        SqlSugarHelper.InitDataBase();
     }
 
-    // 文章管理相关
+    /// <summary>
+    /// 窗口激活时加载数据
+    /// </summary>
+    /// <param name="e"></param>
+    protected override async void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+        await LoadDataAsync();
+        await LoadCategoryDataAsync();
+    }
 
+    #region  文章相关    
     /// <summary>
     /// 新增文章按钮点击事件
     /// </summary>
@@ -77,9 +81,9 @@ public partial class MainWindow : Window
             }
         }
     }
+    #endregion
 
-    // 分类管理相关
-
+    #region 分类相关
     /// <summary>
     /// 加载分类数据
     /// </summary>
@@ -136,4 +140,5 @@ public partial class MainWindow : Window
             }
         }
     }
+    #endregion
 }
