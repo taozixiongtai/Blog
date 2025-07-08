@@ -13,7 +13,7 @@ namespace Blog.Admin;
 public partial class MainWindow : Window
 {
     public ObservableCollection<ArticleViewModel> Articles { get; set; }
-    public ObservableCollection<Category> Categories { get; set; }
+    public ObservableCollection<CategoryViewModel> Categories { get; set; }
 
     public MainWindow()
     {
@@ -66,8 +66,9 @@ public partial class MainWindow : Window
     // 分类管理相关
     private async Task LoadCategoryDataAsync()
     {
+        var mapper = new CategoryMapper();
         var categories = await SqlSugarHelper.Db.Queryable<Category>().ToListAsync();
-        Categories = new ObservableCollection<Category>(categories);
+        Categories = new ObservableCollection<CategoryViewModel>(mapper.CategoriesToCategoryViewModels(categories));
         CategoryDataGrid.ItemsSource = Categories;
     }
 
@@ -84,9 +85,9 @@ public partial class MainWindow : Window
 
     private async void EditCategory_Click(object sender, RoutedEventArgs e)
     {
-        if (CategoryDataGrid.SelectedItem is Category category)
+        if (CategoryDataGrid.SelectedItem is CategoryViewModel categoryViewModel)
         {
-            var dialog = new CategoryEditDialog(category);
+            var dialog = new CategoryEditDialog(categoryViewModel.Id);
             if (dialog.ShowDialog() == true)
             {
                 var updated = dialog.Category;
@@ -98,14 +99,13 @@ public partial class MainWindow : Window
 
     private async void DeleteCategory_Click(object sender, RoutedEventArgs e)
     {
-        if (CategoryDataGrid.SelectedItem is Category category)
+        if (CategoryDataGrid.SelectedItem is CategoryViewModel categoryViewModel)
         {
-            if (MessageBox.Show($"确定要删除“{category.Name}”吗？", "确认删除", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            if (MessageBox.Show($"确定要删除“{categoryViewModel.Name}”吗？", "确认删除", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                await SqlSugarHelper.Db.Deleteable<Category>().Where(s => s.Id == category.Id).ExecuteCommandAsync();
+                await SqlSugarHelper.Db.Deleteable<Category>().Where(s => s.Id == categoryViewModel.Id).ExecuteCommandAsync();
                 await LoadCategoryDataAsync();
             }
         }
     }
 }
-

@@ -1,4 +1,6 @@
 using Blog.Infrastructure.Models;
+using Blog.Infrastructure.SqlSugar;
+using System.Security.Cryptography;
 using System.Windows;
 
 namespace Blog.Admin
@@ -7,17 +9,12 @@ namespace Blog.Admin
     {
         public Category Category { get; private set; }
 
-        public CategoryEditDialog(Category category = null)
+        public CategoryEditDialog(int id = 0)
         {
             InitializeComponent();
-            if (category != null)
+            if (id != 0)
             {
-                Category = new Category
-                {
-                    Id = category.Id,
-                    Name = category.Name,
-                    Image = category.Image
-                };
+                Category=SqlSugarHelper.Db.Queryable<Category>().First(s => s.Id == id);
                 NameTextBox.Text = Category.Name;
                 ImageTextBox.Text = Category.Image;
             }
