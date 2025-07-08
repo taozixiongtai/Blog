@@ -14,9 +14,8 @@ namespace Blog.Admin;
 /// </summary>
 public partial class MarkDownEditer : Window
 {
-    private MarkdownPipeline pipeline;
+    private readonly MarkdownPipeline pipeline;
     private Article _article;
-    private bool IsModify = false;
 
     /// <summary>
     /// 构造函数，根据传入的文章ID决定是新增还是编辑模式。
@@ -36,7 +35,10 @@ public partial class MarkDownEditer : Window
             _article = SqlSugarHelper.Db.Queryable<Article>().First(s => s.Id == id);
             MarkdownTextBox.Text = _article.Content;
             TitleTextBox.Text = _article.Title;
-            IsModify = true;
+        }
+        else
+        {
+            _article = new();
         }
 
         var category = SqlSugarHelper.Db.Queryable<Category>().ToDictionary(s => s.Id, s => s.Name);
@@ -67,23 +69,30 @@ public partial class MarkDownEditer : Window
         if (TitleTextBox.Text.IsNullOrEmpty())
         {
             MessageBox.Show("请输入标题");
-        }
-        if (IsModify)
-        {
-            _article.Title = TitleTextBox.Text;
-            _article.Content = MarkdownTextBox.Text;
-            await SqlSugarHelper.Db.Updateable(_article).ExecuteCommandAsync();
-            var modifyCategory = new ArticleAndCategoryRelation
-            {
-                ArticleId = _article.Id,
-                CategoryId = int.Parse(selectedCategory.Value.Key)
-            };
-            await SqlSugarHelper.Db.Insertable(modifyCategory).ExecuteCommandAsync();
-            MessageBox.Show("修改成功");
-            this.Close();
             return;
         }
 
+        var categoryId = Convert.ToInt32(selectedCategory.Value.Key);
+        if (_article.Id > 0)
+        {
+            await AddArticleAsync(categoryId);
+        }
+        else
+        {
+            await ModifyArticleAsync(categoryId);
+        }
+
+        MessageBox.Show($"{(_article.Id > 0 ? "修改" : "新增")}成功");
+        this.Close();
+    }
+
+    /// <summary>
+    /// 修改文章逻辑
+    /// </summary>
+    /// <param name="categoryId"></param>
+    /// <returns></returns>
+    private async Task ModifyArticleAsync(int categoryId)
+    {
         _article = new();
         _article.Title = TitleTextBox.Text;
         _article.Content = MarkdownTextBox.Text;
@@ -93,12 +102,27 @@ public partial class MarkDownEditer : Window
         var category = new ArticleAndCategoryRelation
         {
             ArticleId = aiticleId,
-            CategoryId = int.Parse(selectedCategory.Value.Key)
+            CategoryId = categoryId
         };
 
         await SqlSugarHelper.Db.Insertable(category).ExecuteCommandAsync();
+    }
 
-        MessageBox.Show("新增成功");
-        this.Close();
+    /// <summary>
+    /// 新增文章逻辑
+    /// </summary>
+    /// <param name="categoryId"></param>
+    /// <returns></returns>
+    private async Task AddArticleAsync(int categoryId)
+    {
+        _article.Title = TitleTextBox.Text;
+        _article.Content = MarkdownTextBox.Text;
+        await SqlSugarHelper.Db.Updateable(_article).ExecuteCommandAsync();
+        var modifyCategory = new ArticleAndCategoryRelation
+        {
+            ArticleId = _article.Id,
+            CategoryId = categoryId
+        };
+        await SqlSugarHelper.Db.Insertable(modifyCategory).ExecuteCommandAsync();
     }
 }
