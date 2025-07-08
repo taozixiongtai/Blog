@@ -1,6 +1,4 @@
 // 入口程序，负责服务注册和中间件配置
-using Blog.Data;
-using Blog.Infrastructure.Models;
 using Blog.Infrastructure.SqlSugar;
 using SqlSugar;
 

@@ -1,6 +1,4 @@
-﻿using SqlSugar;
-
-namespace Blog.Admin.ViewModels;
+﻿namespace Blog.Admin.ViewModels;
 
 /// <summary>
 /// 文章视图模型，用于页面展示

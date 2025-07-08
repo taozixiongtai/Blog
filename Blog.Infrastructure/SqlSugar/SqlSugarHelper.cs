@@ -1,5 +1,4 @@
-﻿using Blog.Data;
-using SqlSugar;
+﻿using SqlSugar;
 using System.Reflection;
 
 namespace Blog.Infrastructure.SqlSugar;

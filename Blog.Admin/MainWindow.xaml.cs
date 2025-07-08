@@ -3,7 +3,6 @@ using Blog.Admin.ViewModels;
 using Blog.Infrastructure.Models;
 using Blog.Infrastructure.SqlSugar;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Blog.Admin;
@@ -15,6 +14,9 @@ public partial class MainWindow : Window
     public ObservableCollection<ArticleViewModel> Articles { get; set; }
     public ObservableCollection<CategoryViewModel> Categories { get; set; }
 
+    /// <summary>
+    /// 构造函数，初始化窗口并加载数据
+    /// </summary>
     public MainWindow()
     {
         InitializeComponent();
@@ -27,12 +29,19 @@ public partial class MainWindow : Window
     }
 
     // 文章管理相关
+
+    /// <summary>
+    /// 新增文章按钮点击事件
+    /// </summary>
     private void AddArticle_Click(object sender, RoutedEventArgs e)
     {
         var editor = new MarkDownEditer();
         editor.ShowDialog();
     }
 
+    /// <summary>
+    /// 加载文章数据
+    /// </summary>
     private async Task LoadDataAsync()
     {
         var mapper = new ArticleMapper();
@@ -41,6 +50,9 @@ public partial class MainWindow : Window
         ArticleDataGrid.ItemsSource = Articles;
     }
 
+    /// <summary>
+    /// 编辑文章按钮点击事件
+    /// </summary>
     private void EditArticle_Click(object sender, RoutedEventArgs e)
     {
         if (ArticleDataGrid.SelectedItem is ArticleViewModel article)
@@ -51,6 +63,9 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// 删除文章按钮点击事件
+    /// </summary>
     private async void DeleteArticle_Click(object sender, RoutedEventArgs e)
     {
         if (ArticleDataGrid.SelectedItem is ArticleViewModel article)
@@ -64,6 +79,10 @@ public partial class MainWindow : Window
     }
 
     // 分类管理相关
+
+    /// <summary>
+    /// 加载分类数据
+    /// </summary>
     private async Task LoadCategoryDataAsync()
     {
         var mapper = new CategoryMapper();
@@ -72,6 +91,9 @@ public partial class MainWindow : Window
         CategoryDataGrid.ItemsSource = Categories;
     }
 
+    /// <summary>
+    /// 新增分类按钮点击事件
+    /// </summary>
     private async void AddCategory_Click(object sender, RoutedEventArgs e)
     {
         var dialog = new CategoryEditDialog();
@@ -83,6 +105,9 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// 编辑分类按钮点击事件
+    /// </summary>
     private async void EditCategory_Click(object sender, RoutedEventArgs e)
     {
         if (CategoryDataGrid.SelectedItem is CategoryViewModel categoryViewModel)
@@ -97,6 +122,9 @@ public partial class MainWindow : Window
         }
     }
 
+    /// <summary>
+    /// 删除分类按钮点击事件
+    /// </summary>
     private async void DeleteCategory_Click(object sender, RoutedEventArgs e)
     {
         if (CategoryDataGrid.SelectedItem is CategoryViewModel categoryViewModel)

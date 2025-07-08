@@ -4,14 +4,13 @@ using Blog.Infrastructure.SqlSugar;
 using Markdig;
 using Markdig.Wpf;
 using Microsoft.IdentityModel.Tokens;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace Blog.Admin;
 
 /// <summary>
-/// MarkDownEditer.xaml 的交互逻辑
+/// MarkDownEditerDialog.xaml 的交互逻辑，实现文章的新增和编辑功能。
 /// </summary>
 public partial class MarkDownEditer : Window
 {
@@ -19,6 +18,10 @@ public partial class MarkDownEditer : Window
     private Article _article;
     private bool IsModify = false;
 
+    /// <summary>
+    /// 构造函数，根据传入的文章ID决定是新增还是编辑模式。
+    /// </summary>
+    /// <param name="id">文章ID，null表示新增，非null表示编辑</param>
     public MarkDownEditer(int? id = null)
     {
         InitializeComponent();
@@ -42,11 +45,17 @@ public partial class MarkDownEditer : Window
         MarkdownViewer.Pipeline = pipeline;
     }
 
+    /// <summary>
+    /// Markdown内容变更时，实时渲染到右侧预览区。
+    /// </summary>
     private void MarkdownTextBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         MarkdownViewer.Markdown = MarkdownTextBox.Text;
     }
 
+    /// <summary>
+    /// 提交按钮点击事件，处理文章的新增或修改逻辑。
+    /// </summary>
     private async void SubmitButton_Click(object sender, RoutedEventArgs e)
     {
         var selectedCategory = CategoryComboBox.SelectedItem as KeyValuePair<string, object>?;
