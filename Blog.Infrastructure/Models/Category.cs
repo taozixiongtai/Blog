@@ -18,7 +18,7 @@ public class Category
     /// 上级分类id
     /// </summary>
     [SugarColumn]
-    public int ParentId { set; get; } 
+    public int ParentId { set; get; }
 
     /// <summary>
     /// 分类名称。

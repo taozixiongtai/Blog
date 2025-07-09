@@ -10,7 +10,15 @@ namespace Blog.Admin.Mapperly;
 [Mapper]
 public partial class CategoryMapper
 {
-    public partial CategoryViewModel CategoryToCategoryViewModel(Category category);
+    // public partial CategoryViewModel CategoryToCategoryViewModel(Category category);
 
-    public partial List<CategoryViewModel> CategoriesToCategoryViewModels(List<Category> categories);
+    private partial List<CategoryViewModel> CategoriesToCategoryViewModels(List<Category> categories);
+
+    [UserMapping(Default = true)]
+    public List<CategoryViewModel> MapCategoriesToCategoryViewModels(List<Category> categories)
+    {
+        var dto = CategoriesToCategoryViewModels(categories);
+        dto.ForEach(c => c.ParentName = categories.FirstOrDefault(p => p.Id == c.ParentId)?.Name ?? "-нч-");
+        return dto;
+    }
 }

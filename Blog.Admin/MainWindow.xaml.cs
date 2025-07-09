@@ -88,7 +88,7 @@ public partial class MainWindow : Window
     {
         var mapper = new CategoryMapper();
         var categories = await SqlSugarHelper.Db.Queryable<Category>().ToListAsync();
-        Categories = new ObservableCollection<CategoryViewModel>(mapper.CategoriesToCategoryViewModels(categories));
+        Categories = new ObservableCollection<CategoryViewModel>(mapper.MapCategoriesToCategoryViewModels(categories));
         CategoryDataGrid.ItemsSource = Categories;
     }
 
