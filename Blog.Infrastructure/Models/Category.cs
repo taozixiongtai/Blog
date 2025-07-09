@@ -15,6 +15,12 @@ public class Category
     public int Id { set; get; }
 
     /// <summary>
+    /// 上级分类id
+    /// </summary>
+    [SugarColumn]
+    public int ParentId { set; get; } 
+
+    /// <summary>
     /// 分类名称。
     /// </summary>
     [SugarColumn]

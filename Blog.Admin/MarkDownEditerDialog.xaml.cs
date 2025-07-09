@@ -17,6 +17,13 @@ public partial class MarkDownEditer : Window
     private readonly MarkdownPipeline pipeline;
     private Article _article;
 
+    protected override async void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+        CategoryComboBox.ItemsSource = await SqlSugarHelper.Db.Queryable<Category>().ToDictionaryAsync(s => s.Id, s => s.Name); 
+        CategoryComboBox.SelectedIndex = 0;
+    }
+
     /// <summary>
     /// 构造函数，根据传入的文章ID决定是新增还是编辑模式。
     /// </summary>
@@ -40,10 +47,6 @@ public partial class MarkDownEditer : Window
         {
             _article = new();
         }
-
-        var category = SqlSugarHelper.Db.Queryable<Category>().ToDictionary(s => s.Id, s => s.Name);
-        CategoryComboBox.ItemsSource = category;
-        CategoryComboBox.SelectedIndex = 0;
         MarkdownViewer.Pipeline = pipeline;
     }
 

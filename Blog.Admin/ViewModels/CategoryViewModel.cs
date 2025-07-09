@@ -1,3 +1,5 @@
+using SqlSugar;
+
 namespace Blog.Admin.ViewModels;
 
 /// <summary>
@@ -19,4 +21,14 @@ public class CategoryViewModel
     /// 分类图标
     /// </summary>
     public string Image { get; set; }
+
+    /// <summary>
+    /// 上级分类id
+    /// </summary>
+    public int ParentId { set; get; }
+
+    /// <summary>
+    /// 上级分类名称
+    /// </summary>
+    public string ParentName { set; get; }
 }

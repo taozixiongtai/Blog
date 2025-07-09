@@ -100,8 +100,6 @@ public partial class MainWindow : Window
         var dialog = new CategoryEditDialog();
         if (dialog.ShowDialog() == true)
         {
-            var category = dialog.Category;
-            await SqlSugarHelper.Db.Insertable(category).ExecuteCommandAsync();
             await LoadCategoryDataAsync();
         }
     }
@@ -116,8 +114,6 @@ public partial class MainWindow : Window
             var dialog = new CategoryEditDialog(categoryViewModel.Id);
             if (dialog.ShowDialog() == true)
             {
-                var updated = dialog.Category;
-                await SqlSugarHelper.Db.Updateable(updated).ExecuteCommandAsync();
                 await LoadCategoryDataAsync();
             }
         }

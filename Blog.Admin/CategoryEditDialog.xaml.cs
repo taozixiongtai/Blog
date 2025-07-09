@@ -1,6 +1,10 @@
 using Blog.Infrastructure.Models;
 using Blog.Infrastructure.SqlSugar;
+using Microsoft.Win32;
+using System.Configuration;
+using System.IO;
 using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace Blog.Admin;
 
@@ -12,36 +16,97 @@ public partial class CategoryEditDialog : Window
     /// <summary>
     /// 当前编辑的分类对象。
     /// </summary>
-    public Category Category { get; private set; }
+    private Category _category { get; set; }
 
     /// <summary>
-    /// 构造函数，根据id加载分类信息，id为0时为新增。
+    /// 选中的图片文件完整路径
     /// </summary>
-    /// <param name="id">分类Id，0表示新增</param>
+    private string? SelectedImageFilePath;
+
+    protected override async void OnActivated(EventArgs e)
+    {
+        base.OnActivated(e);
+        var categories = await SqlSugarHelper.Db.Queryable<Category>().ToDictionaryAsync(s => s.Id, s => s.Name);
+        // 添加空项用于选择无上级分类
+        categories.Add("0", "-无-");
+        ParentCategoriesComboBox.ItemsSource = categories;
+        ParentCategoriesComboBox.SelectedValue = "0";
+    }
+
     public CategoryEditDialog(int id = 0)
     {
         InitializeComponent();
+
         if (id != 0)
         {
             // 编辑模式，加载已有分类信息
-            Category = SqlSugarHelper.Db.Queryable<Category>().First(s => s.Id == id);
-            NameTextBox.Text = Category.Name;
-            ImageTextBox.Text = Category.Image;
+            _category = SqlSugarHelper.Db.Queryable<Category>().First(s => s.Id == id);
+            NameTextBox.Text = _category.Name;
+            if (!string.IsNullOrEmpty(_category.Image))
+            {
+                ImageTextBox.Text = _category.Image;
+                var imgPath = Path.Combine(ConfigurationManager.AppSettings["ImgUrl"], _category.Image);
+                if (File.Exists(imgPath))
+                {
+                    PreviewImageBox.Source = new BitmapImage(new Uri(imgPath));
+                }
+            }
+            ParentCategoriesComboBox.SelectedValue = _category.ParentId;
         }
         else
         {
             // 新增模式，初始化空分类
-            Category = new Category();
+            _category = new Category();
+        }
+    }
+
+    /// <summary>
+    /// 选择图片按钮点击事件
+    /// </summary>
+    private void SelectImage_Click(object sender, RoutedEventArgs e)
+    {
+        var openFileDialog = new OpenFileDialog
+        {
+            Filter = "图片文件|*.jpg;*.jpeg;*.png;*.bmp"
+        };
+        if (openFileDialog.ShowDialog() == true)
+        {
+            SelectedImageFilePath = openFileDialog.FileName;
+            ImageTextBox.Text = Path.GetFileName(SelectedImageFilePath);
+            PreviewImageBox.Source = new BitmapImage(new Uri(SelectedImageFilePath));
         }
     }
 
     /// <summary>
     /// 确定按钮点击事件，保存输入内容并关闭对话框。
     /// </summary>
-    private void Ok_Click(object sender, RoutedEventArgs e)
+    private async void Ok_Click(object sender, RoutedEventArgs e)
     {
-        Category.Name = NameTextBox.Text.Trim();
-        Category.Image = ImageTextBox.Text.Trim();
+        _category.Name = NameTextBox.Text.Trim();
+        _category.ParentId = int.Parse(ParentCategoriesComboBox.SelectedValue?.ToString());
+
+        // 处理图片文件
+        if (!string.IsNullOrEmpty(SelectedImageFilePath))
+        {
+            var fileName = Path.GetFileName(SelectedImageFilePath);
+            var destPath = Path.Combine(ConfigurationManager.AppSettings["ImgUrl"], fileName);
+            File.Copy(SelectedImageFilePath, destPath, true);
+            _category.Image = fileName;
+        }
+        else
+        {
+            _category.Image = ImageTextBox.Text.Trim();
+        }
+
+        if (_category.Id > 0)
+        {
+            await SqlSugarHelper.Db.Updateable(_category).ExecuteCommandAsync();
+        }
+        else
+        {
+            await SqlSugarHelper.Db.Insertable(_category).ExecuteCommandAsync();
+        }
+
         DialogResult = true;
     }
 
