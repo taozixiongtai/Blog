@@ -24,7 +24,6 @@ public class EditController : Controller
     {
         if (ModelState.IsValid)
         {
-            // TODO: ±£´æÂß¼­
             return RedirectToAction("Detail", "Home", new { id = model.Id });
         }
         return View(model);
