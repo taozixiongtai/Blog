@@ -9,9 +9,9 @@ namespace Blog.Services;
 public class BlogServices(ISqlSugarClient _client) : IBlogServices
 {
     /// <summary>
-    /// 主页视图
+    /// 获取博客列表
     /// </summary>
-    /// <returns>返回主页视图</returns>
+    /// <returns></returns>
     public async Task<List<ArticleViewModel>> GetListAsync()
     {
         var articles = await _client.Queryable<Article>().Includes(s => s.Categories).ToListAsync();
@@ -21,10 +21,10 @@ public class BlogServices(ISqlSugarClient _client) : IBlogServices
     }
 
     /// <summary>
-    /// 博客详情视图
+    /// 获取博客详情
     /// </summary>
-    /// <param name="id">博客 ID</param>
-    /// <returns>返回博客详情视图</returns>
+    /// <param name="id">文章的主键</param>
+    /// <returns></returns>
     public async Task<ArticleViewModel> GetByIdAsync(int id)
     {
         var article = await _client.Queryable<Article>().Includes(s => s.Categories).FirstAsync(s => s.Id == id);

@@ -20,7 +20,7 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
     var sqlSugar = new SqlSugarScope(connectionConfig);
 
     // 自动建库和建表
-    SeedData.InitDataBase(connectionConfig);
+    SqlSugarHelper.InitDataBase(connectionConfig);
     return sqlSugar;
 });
 builder.Services.AddScoped<IBlogServices, BlogServices>();
