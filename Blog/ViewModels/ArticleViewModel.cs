@@ -33,7 +33,7 @@ public class ArticleViewModel
     /// <summary>
     /// 正文内容
     /// </summary>
-    public string Content { get; set; }
+    public string ContentHtml { get; set; }
 
     /// <summary>
     /// 最后修改日期

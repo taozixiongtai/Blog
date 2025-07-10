@@ -8,10 +8,6 @@ namespace Blog.Controllers;
 /// <summary>
 /// 主页相关控制器
 /// </summary>
-/// <remarks>
-/// 构造函数
-/// </remarks>
-/// <param name="client">数据库客户端</param>
 public class HomeController(IBlogServices _blogServices) : Controller
 {
 

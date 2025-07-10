@@ -99,6 +99,7 @@ public partial class MarkDownEditer : Window
         _article = new();
         _article.Title = TitleTextBox.Text;
         _article.Content = MarkdownTextBox.Text;
+        _article.ContentHtml = Markdig.Markdown.ToHtml(_article.Content);
         _article.Date = DateTime.Now;
         _article.LastModifyDate = DateTime.Now;
         var aiticleId = await SqlSugarHelper.Db.Insertable(_article).ExecuteReturnIdentityAsync();
@@ -120,6 +121,7 @@ public partial class MarkDownEditer : Window
     {
         _article.Title = TitleTextBox.Text;
         _article.Content = MarkdownTextBox.Text;
+        _article.ContentHtml = Markdig.Markdown.ToHtml( _article.Content );
         await SqlSugarHelper.Db.Updateable(_article).ExecuteCommandAsync();
         var modifyCategory = new ArticleAndCategoryRelation
         {
