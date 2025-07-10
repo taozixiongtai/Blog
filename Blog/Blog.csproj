@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Edit\" />
     <Folder Include="wwwroot\img\" />
   </ItemGroup>
 

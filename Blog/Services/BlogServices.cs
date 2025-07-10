@@ -20,7 +20,6 @@ public class BlogServices(ISqlSugarClient _client) : IBlogServices
         return mapper.ArticlesToArticleViewModels(articles);
     }
 
-
     /// <summary>
     /// 博客详情视图
     /// </summary>
