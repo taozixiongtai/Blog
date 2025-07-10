@@ -1,8 +1,6 @@
-using Blog.Infrastructure.Models;
-using Blog.Mapperly;
 using Blog.Models;
+using Blog.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
-using SqlSugar;
 using System.Diagnostics;
 
 namespace Blog.Controllers;
@@ -14,9 +12,8 @@ namespace Blog.Controllers;
 /// 构造函数
 /// </remarks>
 /// <param name="client">数据库客户端</param>
-public class HomeController(ISqlSugarClient client) : Controller
+public class HomeController(IBlogServices _blogServices) : Controller
 {
-    private readonly ISqlSugarClient _client = client;
 
     /// <summary>
     /// 主页视图
@@ -24,9 +21,8 @@ public class HomeController(ISqlSugarClient client) : Controller
     /// <returns>返回主页视图</returns>
     public async Task<IActionResult> Index()
     {
-        var mapper = new ArticleMapper();
-        var articles = await _client.Queryable<Article>().Includes(s => s.Categories).ToListAsync();
-        return View(mapper.ArticlesToArticleViewModels(articles));
+        var viewModel = await _blogServices.GetListAsync();
+        return View(viewModel);
     }
 
     /// <summary>
@@ -35,9 +31,8 @@ public class HomeController(ISqlSugarClient client) : Controller
     /// <returns>返回博客列表视图</returns>
     public async Task<IActionResult> BlogListAsync()
     {
-        var mapper = new ArticleMapper();
-        var articles = await _client.Queryable<Article>().Includes(s => s.Categories).ToListAsync();
-        return View(mapper.ArticlesToArticleViewModels(articles));
+        var viewModel = await _blogServices.GetListAsync();
+        return View(viewModel);
     }
 
     /// <summary>
@@ -47,9 +42,8 @@ public class HomeController(ISqlSugarClient client) : Controller
     /// <returns>返回博客详情视图</returns>
     public async Task<IActionResult> DetailAsync(int id)
     {
-        var mapper = new ArticleMapper();
-        var article = await _client.Queryable<Article>().Includes(s => s.Categories).FirstAsync(s => s.Id == id);
-        return View(mapper.ArticleToArticleViewModel(article));
+        var viewModel = await _blogServices.GetByIdAsync(id);
+        return View(viewModel);
     }
 
     /// <summary>
