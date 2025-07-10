@@ -14,8 +14,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\style.css" />
-    <None Include="wwwroot\js\main.js" />
+    <None Include="wwwroot\css\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\js\main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

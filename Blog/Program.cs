@@ -14,7 +14,7 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
         ConnectionString = "Data Source=blog.db;Mode=ReadWriteCreate",
         IsAutoCloseConnection = true,
     });
-
+    Console.WriteLine("初始化了");
     // 自动建库和建表
     SqlSugarHelper.InitDataBase(sqlSugar);
     return sqlSugar;
