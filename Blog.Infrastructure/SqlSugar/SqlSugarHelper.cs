@@ -3,12 +3,14 @@ using System.Reflection;
 
 namespace Blog.Infrastructure.SqlSugar;
 
-public class SqlSugarHelper //不能是泛型类
+/// <summary>
+/// sqlsugar数据库操作帮助类
+/// </summary>
+public static class SqlSugarHelper
 {
+
     public static SqlSugarScope Db = new(new ConnectionConfig()
     {
-        DbType = DbType.Sqlite,
-        ConnectionString = "Data Source=blog.db;Mode=ReadWriteCreate",
         IsAutoCloseConnection = true
     });
 
@@ -16,13 +18,11 @@ public class SqlSugarHelper //不能是泛型类
     /// 初始化数据库
     /// </summary>
     /// <param name="db"></param>
-    public static void InitDataBase(SqlSugarScope db = null)
+    public static void InitDataBase(ConnectionConfig connectionConfig)
     {
-        if (db == null)
-        {
-            db = Db;
-        }
-        var tableInfo = db.DbMaintenance.GetTableInfoList();
+        Db.CurrentConnectionConfig = connectionConfig;
+
+        var tableInfo = Db.DbMaintenance.GetTableInfoList();
         // 表信息列表不为空，说明数据库已存在且表已创建，无需再次创建
         if (tableInfo.Count != 0)
         {
@@ -30,7 +30,7 @@ public class SqlSugarHelper //不能是泛型类
         }
 
         // 自动创建数据库 
-        db.DbMaintenance.CreateDatabase();
+        Db.DbMaintenance.CreateDatabase();
 
         // 扫描所有带有SugarTable特性的类
         var entityTypes = Assembly.GetExecutingAssembly()
@@ -38,10 +38,10 @@ public class SqlSugarHelper //不能是泛型类
             .Where(t => t.GetCustomAttribute<SugarTable>() != null)
             .ToList();
 
-        db.CodeFirst.InitTables(entityTypes.ToArray());
+        Db.CodeFirst.InitTables(entityTypes.ToArray());
 
         // 初始化种子数据
-        SeedData.Init(db);
+        SeedData.Init(Db);
     }
 
 }

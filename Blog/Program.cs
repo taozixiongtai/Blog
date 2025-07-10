@@ -11,14 +11,16 @@ builder.Services.AddControllersWithViews();
 var appsetting = builder.Configuration.GetSection(nameof(App)).Get<App>() ?? throw new Exception("读取配置文件失败");
 builder.Services.AddSingleton<ISqlSugarClient>(s =>
 {
-    var sqlSugar = new SqlSugarScope(new ConnectionConfig()
+    var  connectionConfig = new ConnectionConfig()
     {
         DbType = appsetting.SqlSugarOption.DbType,
         ConnectionString = appsetting.SqlSugarOption.ConnectionString,
         IsAutoCloseConnection = true,
-    });
+    };
+    var sqlSugar = new SqlSugarScope(connectionConfig);
+
     // 自动建库和建表
-    SqlSugarHelper.InitDataBase(sqlSugar);
+    SeedData.InitDataBase(connectionConfig);
     return sqlSugar;
 });
 builder.Services.AddScoped<IBlogServices, BlogServices>();
