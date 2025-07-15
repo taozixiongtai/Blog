@@ -11,4 +11,14 @@ public class App
     /// sqlSugar的配置选项
     /// </summary>
     public ConnectionConfig SqlSugarOption { set; get; }
+
+    /// <summary>
+    ///  欢迎消息
+    /// </summary>
+    public string WelcomeMessage { set; get; }
+
+    /// <summary>
+    ///  介绍
+    /// </summary>
+    public string Introduce { set; get; }
 }

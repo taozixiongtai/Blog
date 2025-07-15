@@ -8,7 +8,7 @@
     {
         <div class="articles-header">
             <h2>最新随笔</h2>
-            <a class="button view-all-btn" href="/home/BlogList">查看更多</a>
+            <a class="button view-all-btn" href="/blog/BlogList">查看更多</a>
         </div>
     }
     <ul class="articles-list">
@@ -17,7 +17,7 @@
             <li class="article-item">
                 <img class="article-category" src="/img/@article.CategoryImage" alt="分类">
                 <div class="article-info">
-                    <a class="article-title-link" href="/home/detail?id=@article.Id">@article.Title</a>
+                    <a class="article-title-link" href="/blog/detail?id=@article.Id">@article.Title</a>
                     <span class="article-meta">- @article.Date</span>
                     <span class="article-tag"> @string.Join(" ", article.CategoriesList)</span>
                 </div>

@@ -8,7 +8,9 @@ using SqlSugar;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
-var appsetting = builder.Configuration.GetSection(nameof(App)).Get<App>() ?? throw new Exception("读取配置文件失败");
+var appConfiguration = builder.Configuration.GetSection(nameof(App));
+builder.Services.Configure<App>(appConfiguration);
+var appsetting = appConfiguration.Get<App>() ?? throw new Exception("读取配置文件失败");
 builder.Services.AddSingleton<ISqlSugarClient>(s =>
 {
     var connectionConfig = new ConnectionConfig()

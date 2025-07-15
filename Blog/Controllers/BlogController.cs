@@ -10,7 +10,6 @@ namespace Blog.Controllers;
 /// </summary>
 public class BlogController(IBlogServices _blogServices) : Controller
 {
-
     /// <summary>
     /// Ö÷Ò³ÊÓÍ¼
     /// </summary>
