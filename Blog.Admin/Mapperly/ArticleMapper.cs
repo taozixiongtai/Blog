@@ -10,8 +10,6 @@ namespace Blog.Admin.Mapperly;
 [Mapper]
 public partial class ArticleMapper
 {
-
-
     [MapProperty(
         source: nameof(Article.Categories),
         target: nameof(ArticleViewModel.Categories)

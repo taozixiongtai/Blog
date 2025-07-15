@@ -31,6 +31,9 @@ public partial class MarkDownEditer : Window
     public MarkDownEditer(int? id = null)
     {
         InitializeComponent();
+
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
         // 初始化Markdown管道
         pipeline = new MarkdownPipelineBuilder()
             .UseSupportedExtensions()

@@ -20,6 +20,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        WindowStartupLocation= WindowStartupLocation.CenterScreen;
     }
 
     /// <summary>
@@ -49,7 +50,7 @@ public partial class MainWindow : Window
     private async Task LoadDataAsync()
     {
         var mapper = new ArticleMapper();
-        var articles = await SqlSugarHelper.Db.Queryable<Article>().ToListAsync();
+        var articles = await SqlSugarHelper.Db.Queryable<Article>().Includes(s => s.Categories).ToListAsync();
         Articles = new ObservableCollection<ArticleViewModel>(mapper.ArticlesToArticleViewModels(articles));
         ArticleDataGrid.ItemsSource = Articles;
     }

@@ -36,7 +36,7 @@ public partial class CategoryEditDialog : Window
     public CategoryEditDialog(int id = 0)
     {
         InitializeComponent();
-
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
         if (id != 0)
         {
             // 编辑模式，加载已有分类信息
