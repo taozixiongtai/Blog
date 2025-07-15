@@ -21,4 +21,19 @@ public class App
     ///  介绍
     /// </summary>
     public string Introduce { set; get; }
+
+    /// <summary>
+    ///  网站介绍
+    /// </summary>
+    public string WebIntro { set; get; }
+
+    /// <summary>
+    ///  联系邮箱
+    /// </summary>
+    public string Email { set; get; }
+
+    /// <summary>
+    ///  Github的地址
+    /// </summary>
+    public string GithubUrl { set; get; }
 }

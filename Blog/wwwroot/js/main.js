@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', function() {
       if (i <= text.length) {
         typewriter.textContent = text.slice(0, i);
         i++;
-        setTimeout(typing, 200);
+        setTimeout(typing, 100);
       }
     }
     typing();
