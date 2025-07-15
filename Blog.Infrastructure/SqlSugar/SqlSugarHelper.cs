@@ -9,18 +9,23 @@ namespace Blog.Infrastructure.SqlSugar;
 public static class SqlSugarHelper
 {
 
-    public static SqlSugarScope Db = new(new ConnectionConfig()
+    public static SqlSugarScope? Db
     {
-        IsAutoCloseConnection = true
-    });
+        set; get;
+    }
+
+
+    public static void InitDb(ConnectionConfig connectionConfig)
+    {
+        // 创建 SqlSugarScope 实例
+        Db = new SqlSugarScope(connectionConfig);
+    }
 
     /// <summary>
     /// 初始化数据库
     /// </summary>
-    /// <param name="db"></param>
-    public static void InitDataBase(ConnectionConfig connectionConfig)
+    public static void InitDataBase()
     {
-        Db.CurrentConnectionConfig = connectionConfig;
 
         var tableInfo = Db.DbMaintenance.GetTableInfoList();
         // 表信息列表不为空，说明数据库已存在且表已创建，无需再次创建
@@ -43,5 +48,4 @@ public static class SqlSugarHelper
         // 初始化种子数据
         SeedData.Init(Db);
     }
-
 }

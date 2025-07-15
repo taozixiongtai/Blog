@@ -1,4 +1,5 @@
 ﻿using Blog.Infrastructure.SqlSugar;
+using SqlSugar;
 using System.Configuration;
 using System.Windows;
 
@@ -16,11 +17,14 @@ public partial class App : Application
     protected override void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
-        SqlSugarHelper.InitDataBase(new SqlSugar.ConnectionConfig()
+
+        // 自动建库和建表
+        SqlSugarHelper.InitDb(new ConnectionConfig()
         {
             ConnectionString = ConfigurationManager.AppSettings["ConnectionString"],
-            DbType = (SqlSugar.DbType)Enum.Parse(typeof(SqlSugar.DbType), ConfigurationManager.AppSettings["DbType"] ?? string.Empty),
+            DbType = (DbType)Enum.Parse(typeof(DbType), ConfigurationManager.AppSettings["DbType"] ?? string.Empty),
         });
+        SqlSugarHelper.InitDataBase();
     }
 }
 
