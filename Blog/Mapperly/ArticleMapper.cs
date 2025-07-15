@@ -11,21 +11,16 @@ namespace Blog.Mapperly;
 public partial class ArticleMapper
 {
 
-    [MapProperty(
-        source: nameof(Article.Categories),
-        target: nameof(ArticleViewModel.Categories)
-    )]
     private List<string> MapCategories(List<Category> categories)
         => categories?.Select(c => c.Name).ToList() ?? new List<string>();
 
-    [MapProperty(
-      source: nameof(Article.Categories),
-      target: nameof(ArticleViewModel.CategoryImage)
-  )]
     private string MapCategoryImage(List<Category> categories)
       => categories.FirstOrDefault()?.Image ?? string.Empty;
 
     public partial List<ArticleViewModel> ArticlesToArticleViewModels(List<Article> articles);
 
+    [MapProperty(source: nameof(Article.Categories), target: nameof(ArticleViewModel.CategoriesList), Use = nameof(MapCategories))]
+    [MapProperty(source: nameof(Article.Categories), target: nameof(ArticleViewModel.CategoryImage), Use = nameof(MapCategoryImage))]
     public partial ArticleViewModel ArticleToArticleViewModel(Article article);
+
 }

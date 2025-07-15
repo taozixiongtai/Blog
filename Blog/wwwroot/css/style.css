@@ -278,7 +278,7 @@ h1, h2, h3 {
 .article-item:hover {
   box-shadow: 0 4px 24px rgba(33,118,255,0.10);
 }
-.article-avatar {
+.article-category {
   width: 44px;
   height: 44px;
   border-radius: 50%;

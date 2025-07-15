@@ -20,7 +20,7 @@ public partial class MarkDownEditer : Window
     protected override async void OnActivated(EventArgs e)
     {
         base.OnActivated(e);
-        CategoryComboBox.ItemsSource = await SqlSugarHelper.Db.Queryable<Category>().ToDictionaryAsync(s => s.Id, s => s.Name); 
+        CategoryComboBox.ItemsSource = await SqlSugarHelper.Db.Queryable<Category>().ToDictionaryAsync(s => s.Id, s => s.Name);
         CategoryComboBox.SelectedIndex = 0;
     }
 

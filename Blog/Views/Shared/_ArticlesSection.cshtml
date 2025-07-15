@@ -15,11 +15,11 @@
         @foreach (var article in Model)
         {
             <li class="article-item">
-                <img class="article-avatar" src=" @article.CategoryImage" alt="作者">
+                <img class="article-category" src="/img/@article.CategoryImage" alt="分类">
                 <div class="article-info">
                     <a class="article-title-link" href="/home/detail?id=@article.Id">@article.Title</a>
                     <span class="article-meta">- @article.Date</span>
-                    <span class="article-tag"> @string.Join(" ", article.Categories)</span>
+                    <span class="article-tag"> @string.Join(" ", article.CategoriesList)</span>
                 </div>
             </li>
         }

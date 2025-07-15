@@ -23,7 +23,7 @@ public class ArticleViewModel
     /// <summary>
     /// 分类名称列表
     /// </summary>
-    public List<string> Categories { get; set; }
+    public List<string> CategoriesList { get; set; }
 
     /// <summary>
     /// 封面图片

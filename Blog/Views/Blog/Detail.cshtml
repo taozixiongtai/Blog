@@ -9,7 +9,7 @@
         <div class="detail-meta">
         <span>最近一次更新 : <span id="detail-date" class="detail-date"> @Model.LastModifyDate</span></span>
         </div>
-        <div class="detail-category">标签 : <span class="detail-category-tag" id="detail-category">@string.Join(" ", Model.Categories)</span></div>
+        <div class="detail-category">标签 : <span class="detail-category-tag" id="detail-category">@string.Join(" ", Model.CategoriesList)</span></div>
         <div class="detail-content" id="detail-content">
             @Model.ContentHtml
         </div>

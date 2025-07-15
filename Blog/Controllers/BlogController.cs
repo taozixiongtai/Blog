@@ -8,7 +8,7 @@ namespace Blog.Controllers;
 /// <summary>
 /// 主页相关控制器
 /// </summary>
-public class HomeController(IBlogServices _blogServices) : Controller
+public class BlogController(IBlogServices _blogServices) : Controller
 {
 
     /// <summary>
