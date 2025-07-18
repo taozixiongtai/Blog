@@ -15,7 +15,6 @@ public class BlogController(IBlogServices _blogServices) : Controller
     public async Task<IActionResult> Index()
     {
         var viewModel = await _blogServices.GetListAsync();
-        throw new NotImplementedException("主页视图尚未实现。请在 BlogController 中实现 Index 方法。");
         return View(viewModel);
     }
 
