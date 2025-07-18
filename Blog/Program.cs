@@ -7,7 +7,9 @@ using SqlSugar;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+});
 var appConfiguration = builder.Configuration.GetSection(nameof(App));
 builder.Services.Configure<App>(appConfiguration);
 var appsetting = appConfiguration.Get<App>() ?? throw new Exception("读取配置文件失败");
@@ -32,7 +34,14 @@ var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    // 开发时显示详细错误页面
+    app.UseDeveloperExceptionPage();
+}
+else
+{  // 全局异常处理
+     app.UseExceptionHandler("/Error");
+   // 生产环境使用错误处理页面和状态码重定向
+    app.UseStatusCodePagesWithReExecute("/Error/{0}");
     app.UseHsts();
 }
 

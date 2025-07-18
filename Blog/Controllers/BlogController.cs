@@ -1,7 +1,5 @@
-using Blog.Models;
 using Blog.Services.Interface;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace Blog.Controllers;
 
@@ -17,6 +15,7 @@ public class BlogController(IBlogServices _blogServices) : Controller
     public async Task<IActionResult> Index()
     {
         var viewModel = await _blogServices.GetListAsync();
+        throw new NotImplementedException("主页视图尚未实现。请在 BlogController 中实现 Index 方法。");
         return View(viewModel);
     }
 
@@ -39,15 +38,5 @@ public class BlogController(IBlogServices _blogServices) : Controller
     {
         var viewModel = await _blogServices.GetByIdAsync(id);
         return View(viewModel);
-    }
-
-    /// <summary>
-    /// 错误视图
-    /// </summary>
-    /// <returns>返回错误视图</returns>
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
