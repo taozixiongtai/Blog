@@ -12,7 +12,7 @@ builder.Services.AddControllersWithViews(options =>
 });
 var appConfiguration = builder.Configuration.GetSection(nameof(App));
 builder.Services.Configure<App>(appConfiguration);
-var appsetting = appConfiguration.Get<App>() ?? throw new Exception("读取配置文件失败");
+var appsetting = appConfiguration.Get<App>();
 builder.Services.AddSingleton<ISqlSugarClient>(s =>
 {
     var connectionConfig = new ConnectionConfig()
@@ -39,8 +39,8 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {  // 全局异常处理
-     app.UseExceptionHandler("/Error");
-   // 生产环境使用错误处理页面和状态码重定向
+    app.UseExceptionHandler("/Error");
+    // 生产环境使用错误处理页面和状态码重定向
     app.UseStatusCodePagesWithReExecute("/Error/{0}");
     app.UseHsts();
 }
