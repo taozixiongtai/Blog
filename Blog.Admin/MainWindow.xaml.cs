@@ -3,6 +3,7 @@ using Blog.Admin.ViewModels;
 using Blog.Infrastructure.Models;
 using Blog.Infrastructure.SqlSugar;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Blog.Admin;
@@ -20,7 +21,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        WindowStartupLocation= WindowStartupLocation.CenterScreen;
+        WindowStartupLocation = WindowStartupLocation.CenterScreen;
     }
 
     /// <summary>
@@ -42,6 +43,13 @@ public partial class MainWindow : Window
     {
         var editor = new MarkDownEditer();
         editor.ShowDialog();
+    }
+
+    private async void SyncButton_Click(object sender, RoutedEventArgs e)
+    {
+        // 调用生成种子文件的方法
+        await SqlSugarHelper.GenerateSeedFilesAsync();
+        MessageBox.Show("种子文件已生成！");
     }
 
     /// <summary>

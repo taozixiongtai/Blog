@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "ParentId": 0,
+    "Name": "技术",
+    "Image": "技术.png"
+  },
+  {
+    "Id": 2,
+    "ParentId": 0,
+    "Name": "生活",
+    "Image": "生活.jpg"
+  },
+  {
+    "Id": 3,
+    "ParentId": 0,
+    "Name": "随笔",
+    "Image": "随笔.png"
+  },
+  {
+    "Id": 4,
+    "ParentId": 0,
+    "Name": "共进",
+    "Image": "互进.png"
+  }
+]

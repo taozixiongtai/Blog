@@ -13,22 +13,23 @@ builder.Services.AddControllersWithViews(options =>
 var appConfiguration = builder.Configuration.GetSection(nameof(App));
 builder.Services.Configure<App>(appConfiguration);
 var appsetting = appConfiguration.Get<App>();
+var connectionConfig = new ConnectionConfig()
+{
+    DbType = appsetting.SqlSugarOption.DbType,
+    ConnectionString = appsetting.SqlSugarOption.ConnectionString,
+    IsAutoCloseConnection = true,
+};
 builder.Services.AddSingleton<ISqlSugarClient>(s =>
 {
-    var connectionConfig = new ConnectionConfig()
-    {
-        DbType = appsetting.SqlSugarOption.DbType,
-        ConnectionString = appsetting.SqlSugarOption.ConnectionString,
-        IsAutoCloseConnection = true,
-    };
-    var sqlSugar = new SqlSugarScope(connectionConfig);
 
-    // 自动建库和建表
-    SqlSugarHelper.InitDb(connectionConfig);
-    SqlSugarHelper.InitDataBase();
-    return sqlSugar;
+    return new SqlSugarScope(connectionConfig);
+
 });
 builder.Services.AddScoped<IBlogServices, BlogServices>();
+
+// 自动建库和建表
+SqlSugarHelper.InitDb(connectionConfig);
+await SqlSugarHelper.InitDataBase();
 
 var app = builder.Build();
 

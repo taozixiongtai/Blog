@@ -13,6 +13,7 @@
                 <DockPanel>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#f7f7f7" Height="48" VerticalAlignment="Center">
                         <Button Content="新增文章" Width="100" Height="32" Margin="16,8,0,8" Click="AddArticle_Click" Background="#4CAF50" Foreground="White" FontWeight="Bold"/>
+                        <Button Content="同步" Click="SyncButton_Click" />
                     </StackPanel>
                     <DataGrid x:Name="ArticleDataGrid" AutoGenerateColumns="False" CanUserAddRows="False" Margin="10" IsReadOnly="True">
                         <DataGrid.Columns>
