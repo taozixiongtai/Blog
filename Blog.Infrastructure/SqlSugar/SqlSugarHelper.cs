@@ -35,7 +35,11 @@ public static class SqlSugarHelper
         if (Db.DbMaintenance.Context.CurrentConnectionConfig.DbType == DbType.Sqlite)
         {
             var fileName = GetFileName(Db.DbMaintenance.Context.CurrentConnectionConfig.ConnectionString);
-            if (!File.Exists(fileName))
+            if (File.Exists(fileName))
+            {
+                return;
+            }
+            else
             {
                 Db.DbMaintenance.CreateDatabase();
             }
