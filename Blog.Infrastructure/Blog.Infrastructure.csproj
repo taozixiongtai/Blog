@@ -11,8 +11,4 @@
     <PackageReference Include="SqlSugarCore" Version="5.1.4.197" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="SqlSugar\Seed\" />
-  </ItemGroup>
-
 </Project>

@@ -9,33 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\css\style.css" />
-    <Content Remove="wwwroot\js\main.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\css\style.css">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\js\main.js">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Filter\" />
-    <Folder Include="wwwroot\img\" />
     <Folder Include="Seeds\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Seeds\Article.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>

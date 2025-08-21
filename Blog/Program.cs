@@ -19,12 +19,7 @@ var connectionConfig = new ConnectionConfig()
     ConnectionString = appsetting.SqlSugarOption.ConnectionString,
     IsAutoCloseConnection = true,
 };
-builder.Services.AddSingleton<ISqlSugarClient>(s =>
-{
-
-    return new SqlSugarScope(connectionConfig);
-
-});
+builder.Services.AddSingleton<ISqlSugarClient>(s => new SqlSugarScope(connectionConfig));
 builder.Services.AddScoped<IBlogServices, BlogServices>();
 
 // 自动建库和建表
