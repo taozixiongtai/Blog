@@ -32,29 +32,17 @@ public static class SqlSugarHelper
     /// </summary>
     public static async Task InitDataBase()
     {
-        if (Db.DbMaintenance.Context.CurrentConnectionConfig.DbType == DbType.Sqlite)
+        // 自动创建数据库 
+        if (!Db.DbMaintenance.CreateDatabase())
         {
-            var fileName = GetFileName(Db.DbMaintenance.Context.CurrentConnectionConfig.ConnectionString);
-            if (File.Exists(fileName))
-            {
-                return;
-            }
-            else
-            {
-                Db.DbMaintenance.CreateDatabase();
-            }
+            return;
         }
-        else
-        {
-            var tableInfo = Db.DbMaintenance.GetTableInfoList();
-            // 表信息列表不为空，说明数据库已存在且表已创建，无需再次创建
-            if (tableInfo.Count != 0)
-            {
-                return;
-            }
 
-            // 自动创建数据库 
-            Db.DbMaintenance.CreateDatabase();
+        var tableInfo = Db.DbMaintenance.GetTableInfoList();
+        // 表信息列表不为空，说明数据库已存在且表已创建，无需再次创建
+        if (tableInfo.Count != 0)
+        {
+            return;
         }
 
         // 扫描所有带有SugarTable特性的类
@@ -67,33 +55,6 @@ public static class SqlSugarHelper
 
         await InitDataAsync();
     }
-
-    public static string GetFileName(string connStr)
-    {
-        ReadOnlySpan<char> span = connStr.AsSpan();
-
-        int start = -1;
-        int end = span.Length;
-
-        for (int i = 0; i < span.Length; i++)
-        {
-            if (span[i] == '=' && start == -1)
-            {
-                start = i + 1; // 从等号后开始
-            }
-            else if (span[i] == ';' && start != -1)
-            {
-                end = i; // 第一个分号作为结束
-                break;
-            }
-        }
-
-        if (start == -1)
-            return string.Empty;
-
-        return span.Slice(start, end - start).Trim().ToString();
-    }
-
 
     public static async Task InitDataAsync()
     {

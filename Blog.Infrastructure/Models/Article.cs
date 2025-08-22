@@ -29,13 +29,13 @@ public class Article
     /// <summary>
     /// 文章正文内容（markDown格式）。
     /// </summary>
-    [SugarColumn]
+    [SugarColumn(ColumnDataType ="longtext,text")]
     public string Content { get; set; }
 
     /// <summary>
     /// 文章正文内容（html格式）。
     /// </summary>
-    [SugarColumn(IsNullable = true)]
+    [SugarColumn(ColumnDataType = "longtext,text")]
     public string? ContentHtml { set; get; }
 
     /// <summary>
