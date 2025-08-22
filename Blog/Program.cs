@@ -28,6 +28,7 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
     SqlSugarHelper.InitDb(connectionConfig);
     SqlSugarHelper.InitDataBase().GetAwaiter().GetResult();
 #endif
+
     return new SqlSugarScope(connectionConfig);
 });
 
@@ -52,8 +53,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
-app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
