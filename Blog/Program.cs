@@ -19,14 +19,14 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
     var connectionConfig = new ConnectionConfig()
     {
         DbType = appsetting.SqlSugarOption.DbType,
-        ConnectionString = appsetting.SqlSugarOption.ConnectionString,
+        ConnectionString = string.Format(appsetting.SqlSugarOption.ConnectionString, AppDomain.CurrentDomain.BaseDirectory + "Blog.db"),
         IsAutoCloseConnection = true,
     };
 
 #if DEBUG
     // 自动建库和建表
-    SqlSugarHelper.InitDb(connectionConfig);
-    SqlSugarHelper.InitDataBase().GetAwaiter().GetResult();
+    //SqlSugarHelper.InitDb(connectionConfig);
+    //SqlSugarHelper.InitDataBase().GetAwaiter().GetResult();
 #endif
 
     return new SqlSugarScope(connectionConfig);
