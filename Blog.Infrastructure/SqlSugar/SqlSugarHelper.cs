@@ -29,12 +29,6 @@ public static class SqlSugarHelper
     /// </summary>
     public static async Task InitDataBase()
     {
-        // 自动创建数据库 
-        if (!Db.DbMaintenance.CreateDatabase())
-        {
-            return;
-        }
-
         var tableInfo = Db.DbMaintenance.GetTableInfoList();
         // 表信息列表不为空，说明数据库已存在且表已创建，无需再次创建
         if (tableInfo.Count != 0)

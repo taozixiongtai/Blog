@@ -9,12 +9,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Seeds\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
-		<Content Include="..\Blog.Admin\Blog.db" Link="Blog.db" CopyToOutputDirectory="PreserveNewest" />
+		<Content Include="..\Blog.Admin\Imgs\*.*" Link="wwwroot\img\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+		<Content Include="..\Blog.Admin\Blog.db" Link="" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 
 </Project>
