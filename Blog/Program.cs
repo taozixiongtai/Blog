@@ -5,6 +5,11 @@ using Blog.Services;
 using Blog.Services.Interface;
 using SqlSugar;
 
+#if DEBUG
+// 设置当前工作目录为应用程序的基目录，方便读取sqlite数据库文件
+Directory.SetCurrentDirectory(AppContext.BaseDirectory);
+#endif
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews(options =>
