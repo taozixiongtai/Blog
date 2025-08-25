@@ -24,14 +24,14 @@ builder.Services.AddSingleton<ISqlSugarClient>(s =>
     var connectionConfig = new ConnectionConfig()
     {
         DbType = appsetting.SqlSugarOption.DbType,
-        ConnectionString = string.Format(appsetting.SqlSugarOption.ConnectionString, AppDomain.CurrentDomain.BaseDirectory + "Blog.db"),
+        ConnectionString = appsetting.SqlSugarOption.ConnectionString,
         IsAutoCloseConnection = true,
     };
 
 #if DEBUG
     // 自动建库和建表
-    //SqlSugarHelper.InitDb(connectionConfig);
-    //SqlSugarHelper.InitDataBase().GetAwaiter().GetResult();
+    SqlSugarHelper.InitDb(connectionConfig);
+    SqlSugarHelper.InitDataBase().GetAwaiter().GetResult();
 #endif
 
     return new SqlSugarScope(connectionConfig);
@@ -47,7 +47,8 @@ if (!app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 }
 else
-{  // 全局异常处理
+{
+    // 全局异常处理
     app.UseExceptionHandler("/Error");
     // 生产环境使用错误处理页面和状态码重定向
     app.UseStatusCodePagesWithReExecute("/Error/{0}");
