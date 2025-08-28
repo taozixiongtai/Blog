@@ -1,9 +1,12 @@
 param(
     [string]$ProjectPath = ".",                      # Project path
     [string]$OutputDir = ".\bin\Release\Blog",       # Publish output directory
-    [string]$ZipFile = ".\bin\Release\Blog.zip",     # Zip file name
     [string]$Configuration = "Release",              # Build configuration
-    [string]$Runtime = "linux-x64"                   # Target runtime (linux-x64, win-x64, osx-x64, etc.)
+    [string]$Runtime = "linux-x64",                  # Target runtime (linux-x64, win-x64, osx-x64, etc.)
+    [string]$RemoteUser = "taozixiongtai",              # Remote username
+    [string]$RemoteHost = "localhost",       # Remote server IP or hostname
+    [string]$RemotePath = "/home/taozixiongtai/blog-publish",      # Remote deployment directory
+    [string]$ServiceName = "blog.service"       # systemd service name
 )
 
 Write-Host "Start packaging ASP.NET Core project..." -ForegroundColor Cyan
@@ -25,14 +28,23 @@ if ($LASTEXITCODE -eq 0) {
     exit 1
 }
 
-# 3. Delete old zip
-if (Test-Path $ZipFile) {
-    Write-Host "Removing old zip file: $ZipFile" -ForegroundColor Yellow
-    Remove-Item $ZipFile -Force
-}
+# Stop service
+Write-Host "Stopping systemd service $ServiceName..." -ForegroundColor Cyan
+ssh   "$RemoteUser@$RemoteHost" "sudo systemctl stop $ServiceName"
 
-# 4. Create new zip
-Write-Host "Creating new zip file: $ZipFile ..." -ForegroundColor Green
-Compress-Archive -Path "$OutputDir\*" -DestinationPath $ZipFile
+#Çå¿ÕÎÄ¼þ
+Write-Host "clreaFile" -ForegroundColor Cyan
+ssh  "$RemoteUser@$RemoteHost" "sudo rm -rf $RemotePath/*"
 
-Write-Host "Packaging completed successfully. Output: $ZipFile" -ForegroundColor Cyan
+ # Upload file
+Write-Host "Uploading file to $RemoteHost..." -ForegroundColor Yellow
+scp -r  "$OutputDir\*" "${RemoteUser}@${RemoteHost}:${RemotePath}"
+
+# Start service
+Write-Host "Starting systemd service $ServiceName..." -ForegroundColor Cyan
+ssh "$RemoteUser@$RemoteHost" "sudo systemctl start $ServiceName"
+
+# Check status
+Write-Host "Checking service status..." -ForegroundColor Yellow
+ssh "$RemoteUser@$RemoteHost" "sudo systemctl status $ServiceName --no-pager"
+ 
