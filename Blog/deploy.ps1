@@ -28,23 +28,23 @@ if ($LASTEXITCODE -eq 0) {
     exit 1
 }
 
-# Stop service
+# 停止服务
 Write-Host "Stopping systemd service $ServiceName..." -ForegroundColor Cyan
 ssh   "$RemoteUser@$RemoteHost" "sudo systemctl stop $ServiceName"
 
-#清空文件
+# 清空文件
 Write-Host "clreaFile" -ForegroundColor Cyan
 ssh  "$RemoteUser@$RemoteHost" "sudo rm -rf $RemotePath/*"
 
- # Upload file
+ # 上传
 Write-Host "Uploading file to $RemoteHost..." -ForegroundColor Yellow
 scp -r  "$OutputDir\*" "${RemoteUser}@${RemoteHost}:${RemotePath}"
 
-# Start service
+# 开始服务
 Write-Host "Starting systemd service $ServiceName..." -ForegroundColor Cyan
 ssh "$RemoteUser@$RemoteHost" "sudo systemctl start $ServiceName"
 
-# Check status
+# 检查状态
 Write-Host "Checking service status..." -ForegroundColor Yellow
 ssh "$RemoteUser@$RemoteHost" "sudo systemctl status $ServiceName --no-pager"
  
