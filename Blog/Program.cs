@@ -41,7 +41,7 @@ builder.Services.AddScoped<IBlogServices, BlogServices>();
 
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     // 开发时显示详细错误页面
     app.UseDeveloperExceptionPage();
